@@ -1,46 +1,46 @@
-\contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {1.1}Recent Trends in Statistics}{1}
-\contentsline {section}{\numberline {1.2}Aim of this Thesis}{2}
-\contentsline {section}{\numberline {1.3}Organization of this Thesis}{4}
-\contentsline {chapter}{\numberline {2}Background}{6}
-\contentsline {section}{\numberline {2.1}Classification Trees}{6}
-\contentsline {subsection}{\numberline {2.1.1}Natural Origins}{6}
-\contentsline {subsection}{\numberline {2.1.2}Tree Growth}{8}
-\contentsline {subsection}{\numberline {2.1.3}Cost-Complexity Pruning}{12}
-\contentsline {section}{\numberline {2.2}Tree Interpretability}{14}
-\contentsline {section}{\numberline {2.3}Finding Oblique Splits}{17}
-\contentsline {section}{\numberline {2.4}Possible Reasons for the Status Quo}{19}
-\contentsline {chapter}{\numberline {3}Existing Work}{21}
-\contentsline {section}{\numberline {3.1}Direct Search Approaches}{22}
-\contentsline {subsection}{\numberline {3.1.1}CART with Linear Combinations}{22}
-\contentsline {subsection}{\numberline {3.1.2}Simulated-Annealing Decision Trees}{23}
-\contentsline {subsection}{\numberline {3.1.3}Oblique Classifier 1}{26}
-\contentsline {subsection}{\numberline {3.1.4}Similar Work}{27}
-\contentsline {section}{\numberline {3.2}Indirect Searches Approaches}{30}
-\contentsline {subsection}{\numberline {3.2.1}Fast Algorithm for Classification Trees}{30}
-\contentsline {subsection}{\numberline {3.2.2}Linear Machine Decision Trees}{31}
-\contentsline {subsection}{\numberline {3.2.3}Linear Programming}{31}
-\contentsline {subsection}{\numberline {3.2.4}Perceptron-Based Oblique Trees}{32}
-\contentsline {section}{\numberline {3.3}Summary of Existing Work}{32}
-\contentsline {chapter}{\numberline {4}Oblique Splits via Probabilistic Models}{34}
-\contentsline {section}{\numberline {4.1}Ideal Outcomes}{35}
-\contentsline {section}{\numberline {4.2}Realizing Oblique Splits}{37}
-\contentsline {section}{\numberline {4.3}Examples of Oblique Trees}{39}
-\contentsline {subsection}{\numberline {4.3.1}Original Crabs Data}{40}
-\contentsline {subsection}{\numberline {4.3.2}Augmented Crabs Data}{41}
-\contentsline {subsection}{\numberline {4.3.3}Pima Indians Data}{43}
-\contentsline {subsection}{\numberline {4.3.4}Glass Fragments Data}{43}
-\contentsline {section}{\numberline {4.4}Locally Optimal Subset}{46}
-\contentsline {chapter}{\numberline {5}Interpretable Oblique Trees}{50}
-\contentsline {section}{\numberline {5.1}During Tree Growth}{50}
-\contentsline {subsection}{\numberline {5.1.1}Model Selection (1 MORE PAGE)}{51}
-\contentsline {subsection}{\numberline {5.1.2}Penalised Likelihood (ANOTHER 3 PAGES)}{52}
-\contentsline {section}{\numberline {5.2}Post-Tree Growth}{52}
-\contentsline {subsection}{\numberline {5.2.1}Tree Pruning (ANOTHER 1/2 PAGE)}{53}
-\contentsline {subsection}{\numberline {5.2.2}\emph {Squeezing} Trees Using Shrinkage Methods}{53}
-\contentsline {subsection}{\numberline {5.2.3}Trimming Trees (ANOTHER 4 PAGES)}{54}
-\contentsline {chapter}{\numberline {6}Additional Points}{59}
-\contentsline {section}{\numberline {6.1}Weakness}{59}
-\contentsline {subsection}{\numberline {6.1.1}Poor Oblique Splits (ANOTHER 5 PAGES)}{59}
-\contentsline {subsection}{\numberline {6.1.2}Complexity Analysis (ANOTHER 3 PAGES)}{59}
-\contentsline {chapter}{\numberline {7}Concluding Remarks (ANOTHER 2 PAGES)}{61}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {section}{\numberline {1.1}Recent Trends in Statistics}{4}
+\contentsline {section}{\numberline {1.2}Aim of this Thesis}{5}
+\contentsline {section}{\numberline {1.3}Organization of this Thesis}{7}
+\contentsline {chapter}{\numberline {2}Background}{9}
+\contentsline {section}{\numberline {2.1}Classification Trees}{9}
+\contentsline {subsection}{\numberline {2.1.1}Natural Origins}{9}
+\contentsline {subsection}{\numberline {2.1.2}Tree Growth}{11}
+\contentsline {subsection}{\numberline {2.1.3}Cost-Complexity Pruning}{15}
+\contentsline {section}{\numberline {2.2}Tree Interpretability}{17}
+\contentsline {section}{\numberline {2.3}Finding Oblique Splits}{20}
+\contentsline {section}{\numberline {2.4}Possible Reasons for Status Quo}{23}
+\contentsline {chapter}{\numberline {3}Existing Work}{24}
+\contentsline {section}{\numberline {3.1}Direct Search Approaches}{25}
+\contentsline {subsection}{\numberline {3.1.1}CART with Linear Combinations}{25}
+\contentsline {subsection}{\numberline {3.1.2}Simulated-Annealing Decision Trees}{26}
+\contentsline {subsection}{\numberline {3.1.3}Oblique Classifier 1}{29}
+\contentsline {subsection}{\numberline {3.1.4}Similar Work}{30}
+\contentsline {section}{\numberline {3.2}Indirect Searches Approaches}{33}
+\contentsline {subsection}{\numberline {3.2.1}Fast Algorithm for Classification Trees}{33}
+\contentsline {subsection}{\numberline {3.2.2}Linear Machine Decision Trees}{34}
+\contentsline {subsection}{\numberline {3.2.3}Linear Programming}{34}
+\contentsline {subsection}{\numberline {3.2.4}Perceptron-Based Oblique Trees}{35}
+\contentsline {section}{\numberline {3.3}Summary of Existing Work}{35}
+\contentsline {chapter}{\numberline {4}Oblique Splits via Probabilistic Models}{37}
+\contentsline {section}{\numberline {4.1}Ideal Outcomes}{38}
+\contentsline {section}{\numberline {4.2}Realizing Oblique Splits}{40}
+\contentsline {section}{\numberline {4.3}Examples of Oblique Trees}{42}
+\contentsline {subsection}{\numberline {4.3.1}Original Crabs Data}{43}
+\contentsline {subsection}{\numberline {4.3.2}Augmented Crabs Data}{44}
+\contentsline {subsection}{\numberline {4.3.3}Pima Indians Data}{46}
+\contentsline {subsection}{\numberline {4.3.4}Glass Fragments Data}{46}
+\contentsline {section}{\numberline {4.4}Locally Optimal Subset}{49}
+\contentsline {chapter}{\numberline {5}Interpretable Oblique Trees}{53}
+\contentsline {section}{\numberline {5.1}During Tree Growth}{53}
+\contentsline {subsection}{\numberline {5.1.1}Model Selection (1 MORE PAGE)}{54}
+\contentsline {subsection}{\numberline {5.1.2}Penalised Likelihood (ANOTHER 3 PAGES)}{55}
+\contentsline {section}{\numberline {5.2}Post-Tree Growth}{55}
+\contentsline {subsection}{\numberline {5.2.1}Tree Pruning (ANOTHER 1/2 PAGE)}{56}
+\contentsline {subsection}{\numberline {5.2.2}\emph {Squeezing} Trees Using Shrinkage Methods}{56}
+\contentsline {subsection}{\numberline {5.2.3}Trimming Trees (ANOTHER 4 PAGES)}{57}
+\contentsline {chapter}{\numberline {6}Additional Points}{62}
+\contentsline {section}{\numberline {6.1}Weakness}{62}
+\contentsline {subsection}{\numberline {6.1.1}Poor Oblique Splits (ANOTHER 5 PAGES)}{62}
+\contentsline {subsection}{\numberline {6.1.2}Complexity Analysis (ANOTHER 3 PAGES)}{62}
+\contentsline {chapter}{\numberline {7}Concluding Remarks (ANOTHER 2 PAGES)}{64}

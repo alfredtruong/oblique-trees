@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=latex 2009.2.10)  11 FEB 2009 15:43
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=latex 2009.2.10)  11 FEB 2009 17:24
 entering extended mode
 **thesis.tex
 (thesis.tex
@@ -221,53 +221,54 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 ) (thesis.aux
 (Chapter1.aux) (Chapter2.aux) (Chapter3.aux) (Chapter4.aux) (Chapter5.aux)
 (Chapter6.aux) (Chapter7.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 File: Oxlogo_BW_lg.eps Graphic file (type eps)
  <Oxlogo_BW_lg.eps> [1
 
+
 ] [1]
-LaTeX Font Info:    Try loading font information for U+msa on input line 79.
+LaTeX Font Info:    Try loading font information for U+msa on input line 88.
 
 ("C:\Program Files\MiKTeX 2.7\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 79.
+LaTeX Font Info:    Try loading font information for U+msb on input line 88.
 
 ("C:\Program Files\MiKTeX 2.7\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 ) [2]
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--89
+Underfull \hbox (badness 10000) in paragraph at lines 94--98
 
  []
 
@@ -276,16 +277,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--89
 
 ] [2])
 \tf@toc=\write4
- [3]
-
-Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 100.
 
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 102.
+less on input line 109.
 
-(Chapter1.tex
+
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 111.
+
+[3] (Chapter1.tex
 Chapter 1.
 
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
@@ -297,8 +298,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-[1
-
+[4
 
 
 ]
@@ -308,12 +308,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--24
 
  []
 
-[2]
+[5]
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
-[3]
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
@@ -338,12 +338,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  []
 
-[4]
+[7]
 Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
-) [5] (Chapter2.tex
+) [8] (Chapter2.tex
 Chapter 2.
 File: fig_taxonomy_key_biology_table.eps Graphic file (type eps)
 <fig_taxonomy_key_biology_table.eps>
@@ -358,11 +358,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--24
 
  []
 
-[6
+[9
 
 
 
-] [7]
+] [10]
 File: fig_typical_CART_tree_plot_tree.ps Graphic file (type eps)
  <fig_typical_CART_tree_plot_tree.ps>
 File: fig_typical_CART_tree_decision_boundaries.ps Graphic file (type eps)
@@ -377,45 +377,43 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
-[8] [9]
+[11] [12]
 Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
-[10]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 80--83
 
  []
 
-[11]
+[14]
 File: fig_rooted_subtrees.ps Graphic file (type eps)
  <fig_rooted_subtrees.ps>
 
 LaTeX Warning: Float too large for page by 6.60341pt on input line 89.
 
-[12] [13]
+[15] [16]
 File: fig_tree_pruning.ps Graphic file (type eps)
  <fig_tree_pruning.ps>
 File: fig_tree_interpretability_more.ps Graphic file (type eps)
  <fig_tree_interpretability_more.ps>
 File: fig_tree_interpretability_less.ps Graphic file (type eps)
 
-<fig_tree_interpretability_less.ps> [14]
+<fig_tree_interpretability_less.ps> [17]
 File: fig_power_of_splits_oblique.ps Graphic file (type eps)
  <fig_power_of_splits_oblique.ps>
 File: fig_power_of_splits_axis_parallel.ps Graphic file (type eps)
 
-<fig_power_of_splits_axis_parallel.ps> [15]
+<fig_power_of_splits_axis_parallel.ps> [18] [19]
 Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
-[16]
 File: fig_split_dictionary_axis_parallel.eps Graphic file (type eps)
- <fig_split_dictionary_axis_parallel.eps>
+<fig_split_dictionary_axis_parallel.eps>
 File: fig_split_dictionary_oblique.eps Graphic file (type eps)
-
-<fig_split_dictionary_oblique.eps>
+ <fig_split_dictionary_oblique.eps>
 Underfull \hbox (badness 10000) in paragraph at lines 135--151
 
  []
@@ -425,6 +423,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
  []
 
+[20] [21]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
@@ -438,24 +437,18 @@ ere are ex-actly
  []
 
 
-Overfull \hbox (19.63669pt too wide) in paragraph at lines 154--155
-\OT1/cmr/m/n/12 cult. For-tu-nately how-ever its size has been shown to be ex-a
-ctly $[] \OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2$
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 154--155
 
  []
 
-[17] [18] [19]) [20] (Chapter3.tex
+[22]) [23] (Chapter3.tex
 Chapter 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-[21
+[24
 
 
 
@@ -475,21 +468,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-[22]
+[25]
 Underfull \hbox (badness 10000) in paragraph at lines 158--160
 
  []
 
-[23] [24] [25]
+[26] [27] [28]
 
-LaTeX Warning: Reference `' on page 26 undefined on input line 170.
+LaTeX Warning: Reference `' on page 29 undefined on input line 170.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
  []
 
-[26] [27] [28] [29] [30] [31]) [32] [33] (Chapter4.tex
+[29] [30] [31] [32] [33] [34]) [35] [36] (Chapter4.tex
 Chapter 4.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
@@ -501,7 +494,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-[34
+[37
 
 
 
@@ -542,22 +535,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-[35]
+[38]
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
-[36] [37]
+[39] [40]
 Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
-[38]
+[41]
 Underfull \hbox (badness 10000) in paragraph at lines 59--60
 
  []
 
-[39]
+[42]
 Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
  []
@@ -574,7 +567,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
-[40]
+[43]
 Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
@@ -598,7 +591,7 @@ File: oblique_splits_crabs_augmented_only_tree.ps Graphic file (type eps)
 File: oblique_splits_crabs_augmented_only_decision_boundaries.ps Graphic file (
 type eps)
 
-<oblique_splits_crabs_augmented_only_decision_boundaries.ps> [41] [42]
+<oblique_splits_crabs_augmented_only_decision_boundaries.ps> [44] [45]
 Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
@@ -641,7 +634,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
-[43] [44] [45]
+[46] [47] [48]
 Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
@@ -659,21 +652,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
-[46]
+[49]
 File: impurity_plot_2d_crabs_data_detail_100_bb.ps Graphic file (type eps)
  <impurity_plot_2d_crabs_data_detail_100_bb.ps>
 Underfull \hbox (badness 10000) in paragraph at lines 185--186
 
  []
 
-[47] [48]) [49] (Chapter5.tex
+[50] [51]) [52] (Chapter5.tex
 Chapter 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
-[50
+[53
 
 
 
@@ -692,7 +685,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--32
 
  []
 
-[51]
+[54]
 Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
  []
@@ -702,7 +695,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
-[52]
+[55]
 Underfull \hbox (badness 10000) in paragraph at lines 61--62
 
  []
@@ -712,12 +705,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--69
 
  []
 
-[53]
+[56]
 Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
 
-[54]
+[57]
 Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
@@ -727,7 +720,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
-[55]
+[58]
 File: figconcisetreesandcomp.eps Graphic file (type eps)
  <figconcisetreesandcomp.eps>
 Underfull \hbox (badness 10000) in paragraph at lines 98--99
@@ -744,7 +737,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--103
 
  []
 
-[56] [57]) [58] (Chapter6.tex
+[59] [60]) [61] (Chapter6.tex
 Chapter 6.
 
 Underfull \hbox (badness 10000) in paragraph at lines 9--10
@@ -756,25 +749,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--14
 
  []
 
-[59
+[62
 
 
 
-]) [60] (Chapter7.tex
+]) [63] (Chapter7.tex
 Chapter 7.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
-) [61
+) [64
 
 
 
-] (thesis.bbl [62
+] (thesis.bbl [65
 
 
-] [63]) [64] (thesis.aux (Chapter1.aux) (Chapter2.aux)
+] [66]) [67] (thesis.aux (Chapter1.aux) (Chapter2.aux)
 (Chapter3.aux) (Chapter4.aux) (Chapter5.aux) (Chapter6.aux) (Chapter7.aux))
 
 LaTeX Warning: There were undefined references.
@@ -782,11 +775,11 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  2423 strings out of 95305
- 30744 string characters out of 1183097
- 94893 words of memory out of 1500000
+ 30741 string characters out of 1183097
+ 95349 words of memory out of 1500000
  5494 multiletter control sequences out of 110000
  15839 words of font info for 59 fonts, out of 3000000 for 5000
  14 hyphenation exceptions out of 8191
- 27i,11n,43p,1601b,477s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,11n,43p,1558b,477s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on thesis.dvi (71 pages, 147068 bytes).
+Output written on thesis.dvi (71 pages, 146624 bytes).
