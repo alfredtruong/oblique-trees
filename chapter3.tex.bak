@@ -1,0 +1,283 @@
+\chapter{Existing Work}
+\label{ExistingWork} 
+Before presenting an approach to growing more interpretable oblique trees, this chapter reviews existing methods of growing oblique trees. As noted in Section~\ref{FindingObliqueSplits}, it is infeasible to find the best oblique split at each stage of tree growth. Existing methods of finding oblique splits avoid this computational explosion in one of two ways, 
+\begin{description}
+\item[Direct Search Methods:] search for splits with low impurity values in the split dictionary while enforcing some stopping criterion for the search
+\item[Indirect Search Methods:] focus on a subset of the split dictionary found by solving well-defined problems (which effectively produce oblique splits)
+\end{description}
+Each methodology has its inherent strengths and weaknesses for which it is important to understand.\\
+
+This chapter is organised as follows. Existing work is categorised into the above methodologies and presented chronologically as this allows a clearer understanding of its progression. Section~\ref{DirectSearch} presents direct methods and Section~\ref{IndirectSearch} follows with indirect methods. Section~\ref{SummaryofExistingWork} finishes by highlighting the strengths and weaknesses associated with these methodologies.
+
+\section{Direct Search}
+\label{DirectSearch}
+The methodology taken by researchers in this section can be summarized as follows, 
+\begin{enumerate}
+\item oblique splits can be thought of as hyperplanes ($\sum_{i=1}^q a_iX_i=c$)
+\item consider the $(q+1)$-dimensional space defined by these hyperplane coefficients
+\item define a goodness (or badness) function $G(\sum_{i=1}^q a_iX_i=c)$ for hyperplanes
+\item find the global maxima (or minima) of $G()$ over $R^{q+1}$
+\end{enumerate}
+
+In viewing the search for the best split in this way, the computational problem persists. It does however render the problem suitable to hill-climbing ideas for finding the global minimum of $G()$. Notable attempts that use this methodology are presented below.
+
+\subsection{CART with Linear Combinations}
+\label{CARTwithLinearCombinations}
+One of the earliest direct search methods was proposed by Breiman \emph{et al} as an aside in their CART book~\cite{cart84-2}. As axis-parallel trees were the main focus of their work, they did not name this method though it has since been dubbed \emph{CART with Linear Combinations} (CART-LC) by others. \\
+
+Their approach to finding oblique splits works as follows. Starting from the best axis-parallel split, look for full oblique split with high goodness values $G()$ in this vacinity. From the best full oblique split found, remove as many attributes as possible without affecting the goodness measure too much. This allows concise oblique splits to be found upon which, tree growth continues as usual. A pseudocode description is given. 
+
+\begin{algorithm}
+\caption{CART-LC}
+\begin{algorithmic}
+\REQUIRE (a) a goodness measure $G()$ for comparing hyperplanes
+
+\medskip
+\STATE \emph{\COMMENT{Scale all continuous attributes}}
+\STATE Centre all continuous attributes at their median and divide by their IQR
+
+\medskip
+\STATE \emph{\COMMENT{Find best axis-parallel and concise oblique split}}
+\STATE $L_{axis}\leftarrow$ best axis-parallel split
+\STATE $L_{concise}\leftarrow$ concise oblique split found by calling \textbf{\emph{CART-LC - Concise}}
+\RETURN the better of $L_{axis}$ and $L_{concise}$ w.r.t. $G()$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{CART-LC - Concise}
+\begin{algorithmic}
+\STATE \emph{\COMMENT{Find a concise oblique split by perturbing the best axis-parallel split and removing insignificant attributes}}
+\REQUIRE (a) a goodness measure $G()$ to compare hyperplanes and (b) a tolerance variable $\beta$
+
+\medskip
+\STATE \emph{\COMMENT{Find full oblique split by perturbing the best axis-parallel split}}
+\STATE $L_{axis}\leftarrow$ best axis-parallel split
+\STATE $M\leftarrow\left\{1,\ldots,q\right\}$
+\STATE $\sum_M a_i X_i=c\leftarrow$ \textbf{\emph{CART-LC - Oblique}}$(L_{axis},M)$
+
+\medskip
+\STATE \emph{\COMMENT{Improve interpretability of $L_{oblique}$ by elimination attributes}}
+\LOOP
+\STATE $\Delta^\star\leftarrow G(\sum_M a_i X_i=c)$
+
+\medskip
+\STATE \emph{\COMMENT{Consider effect of removing each attribute singly}}
+\FOR{each $m\in M$}
+\STATE Find $c_m$ that maximises $G()$ for the hyperplane $\sum_{M\backslash m} a_i X_i=c_m$
+\STATE $\Delta_m\leftarrow G(\sum_{M\backslash m} a_i X_i=c_m)$
+\ENDFOR
+
+\medskip
+\STATE \emph{\COMMENT{If large reduction in $\Delta^\star$ is possible, remove attribute and continue}}
+\IF{$\Delta^\star-\max_m \Delta_m<\beta (\Delta^\star-\min_m \Delta_m)$}
+\STATE $m^\star\leftarrow \arg\min \Delta_m$
+\STATE $a_{m^\star}\leftarrow 0$
+\STATE $c\leftarrow c_{m^\star}$
+\STATE $M\leftarrow M\backslash m^\star$
+\ELSE
+\STATE Exit \textbf{loop}
+\ENDIF
+\ENDLOOP
+
+\medskip
+\STATE \emph{\COMMENT{Find best concise oblique split that use the same continuous attributes starting from concise oblique split just found}}
+\STATE $L_{concise}^\star\leftarrow$ \textbf{\emph{CART-LC - Oblique}}$(\sum_M a_i X_i=c,M)$
+\RETURN $L_{concise}^\star$
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{CART-LC - Oblique}
+\begin{algorithmic}
+\STATE \emph{\COMMENT{Find locally optimal oblique split by perturbing current hyperplane}}
+\REQUIRE (a) the current split $\sum_{i=1}^q a_i X_i=c$, (b) a set $M\subset\left\{1,\ldots,q\right\}$ denoting the continuous attributes improvements are considered upon, (c) a goodness measure $G()$ to compare hyperplanes and (d) a tolerance variable $\epsilon$
+\medskip
+\STATE \emph{\COMMENT{Perturb current hyperplane until improvements to $G()$ are small}}
+\STATE $i\leftarrow 1$
+\STATE Label current hyperplane $L_i$
+\REPEAT
+	\STATE \emph{\COMMENT{Find pair $(a_m,c)$ that locally maximises $G()$ for each $m\in M$}}
+	\FOR{each $m\in M$}
+		\STATE Let $\nu=\sum_{i=1}^q a_iX_i$, $\gamma\in\left\{-0.25,0,0.25\right\}$ and $\delta\in\mathbb{R}$
+		\STATE Find $(\gamma^\star,\delta^\star)$ that maximises $G()$ for the hyperplane $\nu-\delta(X_m+\gamma)=c$
+		\STATE $a_m\leftarrow a_m-\delta^\star$ 
+		\STATE $c\leftarrow c+\delta^\star\gamma^\star$ 
+	\ENDFOR
+	\medskip
+
+	\STATE \emph{\COMMENT{Find intercept $c$ that maximises $G()$ when holding $\left(a_1,\ldots,a_q\right)$ fixed}}
+	\STATE Keeping $\nu$ fixed, find $c^\star$ to maximise $G()$
+	\medskip
+
+	\STATE \emph{\COMMENT{Prepare for next iteration}}
+	\STATE $i\leftarrow i+1$
+	\STATE Label current hyperplane $L_i$
+\UNTIL {$|G(L_{i-1})-G(L_i)|<\epsilon$}
+\RETURN current hyperplane $L_i$
+\end{algorithmic}
+\end{algorithm}
+
+Though CART-LC allows concise oblique splits to be found, it does so in a highly heuristic manner. A further criticism to add is the restrictiveness of its search over the $q+1$-dimensional space of oblique splits. There is no guarantee that local maxima of $G()$ in the vacinity of the best axis-parallel split is even close to the global minima.
+
+\subsection{Simulated-Annealing Decision Trees}
+\label{SimulatedAnnealingDecisionTrees}
+In terms of the restrictiveness of the search-space, Heath \emph{et al}'s (1993)~\cite{heath93induction} Simulated-Annealing Decision Trees (SADT) greatly improves upon CART-LC as it theoretically allows a search over the entire $q+1$-dimensional space. Starting at an arbitrarily chosen hyperplane, coefficients are perturbed with Unif[-0.5,0.5) random variables under a simulated-annealing~\cite{kirkpatrick83optimization}\cite{cerny:1985:thermodynamical} regime whereby perturbed hyperplanes that improve $G()$ are always accepted while those that do not are accepted with decreasing probability. SADT terminates when $G()$ remains unchanged for a prespecified number of iterations (3000-30000 iterations were used in their paper). \\
+
+As simulated-annealing is stochastic in nature, a different tree is grown at each attempt. Though Heath \emph{et al} market this as a strength, I argue that it simply leaves unaddressed the issue as to how one chooses among the 1000's of trees that can be grown. Also, no attempt is made to find concise oblique splits, SADT trees use full oblique splits at every node and so are not interpretable. A final point to note is the run-time of SADT. As the time taken to find oblique splits is dictated by cooling rate of the simulated-annealing regime, this overhead is propogated through the tree and so unnecessarily prolongs tree growth.
+
+\subsection{Oblique Classifier 1}
+\label{ObliqueClassifier1}
+As regards to run-time, Murthy \emph{et al}'s (1993)~\cite{murthy93oc} OC1 (Oblique Classifier 1) improve upon SADT by simply replacing the simulated-annealing regime with a deterministic minimum finding algorithm. In order to escape local minima, they allow random bumps of hyperplanes that are stuck and allows multiple random starts (trapped hyperplanes are bumped 5 times and 20-50 random restarts are used). A pseudocode description is given.\\ 
+
+\begin{algorithm}
+\caption{OC1}
+\begin{algorithmic}
+\REQUIRE (a) a badness measure $G()$ to compare hyperplanes and (b) $K$ specifying the number of restarts
+
+\medskip
+\STATE \emph{\COMMENT{Find best axis-parallel and make $K$ attempts to find best oblique split}}
+\STATE $H^{axis}\leftarrow$ best axis-parallel split\\
+\FOR{$k$ in $1,\ldots,K$}
+	\STATE $H_k^{oblique}\leftarrow$ oblique split found using \textbf{\emph{OC1:Oblique}}
+\ENDFOR
+\STATE $k^\star\leftarrow \mathop{\arg \min}_k G(H_k^{oblique})$
+\RETURN the better of $H^{axis}$ and $H_{k^\star}^{oblique}$ w.r.t. $G()$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{OC1:Oblique}
+\begin{algorithmic}
+\REQUIRE (a) $J$ specifying the number of attempts to escape local minima
+
+\medskip
+\STATE $H^{oblique}\leftarrow$ randomly initial hyperplane
+
+\medskip
+\STATE \emph{\COMMENT{Search for global minima of $G()$ over $R^{q+1}$}}
+\REPEAT
+
+	\medskip
+	\STATE \emph{\COMMENT{Given $\Pi$ specifing the order in which coefficients in are optimised over, minimise $G()$}}
+	\REPEAT
+		\STATE Call \textbf{\emph{OC1:Minimise}}$(a_m)$ to find a hyperplane with lower $G()$
+	\UNTIL{trapped at a local minima of $G()$}
+
+	\medskip
+	\STATE \emph{\COMMENT{Attempt to escape local minima}}
+	\STATE $R\leftarrow$ randomly chosen $\mathbb{R}^{q+1}$ vector\\
+	\STATE Choose $\alpha^\star$ to minimise $G()$ over the splits $H_R^{oblique}(\alpha)=H^{oblique}+\alpha R$
+	\IF{$G(H_R^{oblique}(\alpha^\star))<G(H^{oblique})$}
+		\STATE $H_{oblique}\leftarrow H_R^{oblique}(\alpha^\star)$
+	\ENDIF
+\UNTIL{$J$ attempts have been made to escape local minima}
+\RETURN $H^{oblique}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{OC1:Minimise}
+\begin{algorithmic}
+\REQUIRE (a) Current hyperplane coefficients $H$ and (b) a coefficient $a_m$ to optimise\\
+
+\medskip
+\STATE \emph{\COMMENT{Minimising $G()$ over $a_m$ deterministically}}
+\FOR{each observation $j$}
+	\STATE $h_j\leftarrow$ numerical value of observation $j$ when evaluated on $H$
+	\STATE $u_j\leftarrow\frac{a_m X_{jm}-h_j}{X_{jm}}$
+\ENDFOR
+\STATE $a_m^\star\leftarrow$ best univariate split point found over $u_j$'s
+\STATE $H^\star\leftarrow\left(a_1,\ldots,a_{m-1},a_m^\star,a_{m+1},\ldots,a_q\right)$
+
+\medskip
+\STATE \emph{\COMMENT{Accept $H^\star$ under a simulated-annealing-like regime}}
+\IF{$G(H^\star)<G(H)$}
+	\RETURN $H^\star$
+	\STATE $P_{move}=P_{stagnation}$
+\ELSIF{$G(H^\star)=G(H)$}
+	\RETURN $H^\star$ with probability $P_{move}$ and $H$ with probability $1-P_{move}$
+	\STATE $P_{move}=P_{move}-0.1P_{stagnation}$
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+%	Several approaches $\pi$ to choosing which coefficient $a_m$ to optimise are proposed,
+%	\begin{description}
+%	\item[Sequential:] Optimise the coefficients in order $\left\{a_m\right\}_{m=1}^p$
+%	\item[Best:] Repeat until $a_k$ unchanged where optimisation of coefficient $a_k$ results in the greatest improvement in $G()$
+%	\item[Repeat-50:] Optimise 50 coefficients which are randomly chosen 
+%	\end{description}
+The main component of OC1 is \textbf{\emph{OC1:Minimise}} where they transform a global minimization problem over a $(q+1)$-dimensional surface into many 1-dimensional ones. By reusing an idea from Breiman \emph{et al}'s CART book, these smaller problems are easily solved in a deterministic manner. As the approach taken by OC1 is identical to SADT, other than improving run-time, OC1 suffers from the same problems as SADT of uninterpretable trees and multiple solutions.
+
+\subsection{Similar Work}
+\label{SimilarWork}
+Cantu-Paz \emph{et al} (2000)~\cite{cantupaz00using}\cite{cantu-paz-inducing} and Tan \emph{et al} (2004)~\cite{tan04} also contributed to this area using direct search ideas. Instead of maxima (minima) finding algorithms, they use genetic algorithms which essentially work in the same way. `Mutations' of splits (randomly perturbing hyperplanes) are compared with $G()$ upon which `fit' splits (those with lower impurity) are always accepted and `less fit' ones (which do not reduce impurity) are accepted with decreasing probability.
+
+\section{Indirect Searches for Oblique Splits}
+\label{IndirectSearch}
+The methodology taken by researchers in this section can be summarized as follows,
+\begin{enumerate}
+\item oblique splits ($\sum_i a_iX_i=c$) are simply linear decision boundaries
+\item specify a family of classification problems to solve (which effectively defines a set of oblique splits, i.e. a subset of the oblique split dictionary)
+	\begin{comment}
+	\begin{enumerate}
+		\item \emph{residual observations} from the training set that fall into each node during tree growth can be considered as a separate classification problem (on a restricted domain)
+		\item by training a classifier on these data, we can use their predictions as outcomes of some (possibly complex) test at this node
+		\item choosing a linear classifier in particular, we essentially find ourselves oblique splits at this nodes 
+	\end{enumerate}
+	\end{comment}
+\item focusing on this subset, continue tree growth as usual by finding the split with the lowest impurity
+\end{enumerate}
+
+Many researchers have made use of this idea to create tree-like classifiers. Though each researcher has a different emphasis, it is still useful to understand each attempt.
+
+\subsection{Fast Algorithm for Classification Trees}
+\label{FastAlgorithmforClassificationTrees}
+One of the earliest attempts to growing oblique trees with this methodology is FACT (Fast Algorithm for Classification Trees). Proposed by Loh \emph{et al} (1988)~\cite{Loh:1988:TSC}, it uses LDA to perform \emph{tests} at each node. By fitting an LDA classifier to \emph{residual observations} (those observations in the training set that fall to a particular node), each node has as many child nodes as there are \emph{residual classes}; FACT grows \emph{multi-way} trees. With fewer observations of each class in latter nodes during tree growth, Loh \emph{et al} worry that covariance matrices will become singular and so apply LDA to the projections of observations to those principal components whose eigenvalues are greater than $0.05$. Though this is a rather artificial way of growing multi-way classification trees, it is instructive to understand this idea. %LDA is also used by Vadera (2005)~\cite{vadera-inducing} whose article focuses on the growth of `safer' trees without the need to explicit specify a loss matrix. For two class classification problems where one class is more important than the other, splits are augmented to be more `confident' about classifications to the `unsafe' class by relying on more observations.
+
+\subsection{Linear Machine Decision Trees}
+\label{LinearMachineDecisionTrees}
+Proposed by Utgoff \emph{et al} (1991)~\cite{utgoff91linear}\cite{brodley92multivariatea}\cite{brodley92multivariateb}, Linear Machine Decision Trees (LMDT) grow multi-way oblique trees using perceptron~\cite{rosenblatt58} training ideas. At each stage of tree growth, residual observations are firstly sphered. If there are $R$ residual classes at a node, $R$ linear discriminants $g_i(Y)=W_i^TY$ are found by training \emph{thermal perceptrons}~\cite{159794}. A thermal perceptron is essentially a perceptron that is forced to converge by progressively down-weigh misclassifications that are distant from the perceptron. 
+
+\subsection{Linear Programming}
+\label{LinearProgramming}
+Brown \emph{et al} (1996)~\cite{230524} set up linear programming problems that are very similar to those posed by support vector machines to grow binary-splitting oblique trees. To find oblique splits during tree growth, the following family of linear programming problems are solved. Let $C_R=\left\{C_1,\ldots,C_R\right\}$ denote residual classes at a node and consider the following problem for class $C_i$,
+\begin{algorithmic}
+\medskip
+\STATE Minimise $\delta$ subject to:
+\STATE \hspace{2em} $X_i^Tw-\delta \leq b$ $\forall X_i\in C_i$
+\STATE \hspace{2em} $X_i^Tw+\delta \geq b$ $\forall X_i\not\in C_i$
+\STATE \hspace{2em} $b +\sum{w_k} = const$
+\medskip
+\end{algorithmic}
+The solution to each problem produces an oblique split that tried to separate observations of class $C_i$ from all others. By solving all $R$ problems, tree growth continues as usual by applying the split with the lowest impurity.
+
+\begin{comment}
+Setting up these $R$ linear programming problems allows for $R$ interesting obliques splits to be obtained in a very simple manner and it directly obtains splits that separate classes well rather than seeking to minimise the impurity measure over all such splits. An obvious criticism however would be that the case where classes $C_1$ and $C_2$ together are perfectly separated from the rest are not considered when finding oblique splits and so the search for oblique splits is does not provide comprehensive coverage of all possible splits. I would also add to this the fact that no obvious way to extracting concise oblique splits by solving linear programming problems and so trees grown by this method may not be as interpretable as would be hoped.
+\end{comment}
+
+\begin{comment}
+\subsection{Global Tree Optimisation SVM}
+\label{GlobalTreeOptimisationSVM}
+Bennett \emph{et al} use support vector machines (SVM) in GTO/SVM (Global Tree Optimisation SVM) (1997)~\cite{bennett97support}. The focus of their work focuses more on improving the predictive power of trees that have already been grown by maximising the margin between the oblique splits used and the observations in the training set. Once a tree structure is known, their article illustrates how all sequential SVM problems can be combined and solved simultaneously so that the entire tree can be regrown in one go while moving existing oblique splits away from observations.
+\end{comment}
+
+\subsection{Perceptron-Based Oblique Trees}
+\label{PerceptronBasedObliqueTrees}
+The last method shown uses logistic regression to find oblique splits. Misleadingly called Perceptron-Based Oblique Trees (P-BOT), Axelrod \emph{et al}'s (2005)~\cite{axelrod05} method grows two-level tree-like structures by concatenating logistic regression classifiers. Predictions from the logistic regression classifier in the first-level paritions observations into several child nodes upon which another logistic regression classifier is trained to residual observations in each child node. This second-level classifier provides classifies observations. As the focus of their work is to simply create more flexible tree-like classifiers, no attention is paid to making P-BOT interpretable (all attributes are used as inputs to the logistic regression classifiers). P-BOT is essentially a two-level multi-way oblique tree that is not interpretable. 
+
+\section{Summary of Existing Work}
+\label{SummaryofExistingWork}
+As noted at the start of this chapter, direct search methods and indirect search methods seek to accomplish the same goal; allowing good oblique splits (oblique splits with low values of impurity) to be quickly found. There are two fundamentally conflicting goals to balance to achieve this.
+\begin{description}
+\item[Quality of splits:] The more splits the method considers, the more likely that splits with low impurity values are found. Direct search methods in theory allow every split in the split dictionary to be considered while indirect search methods focus on some predefined subset. Whichever method used, splits with low impurity values should be considered by the subset.
+\item[Computation cost:] The more splits considered, the greater the computational cost of the method. Indirect searches allow as many (or as few) splits to be considered as one desires and so allows oblique trees to be grown quickly. 
+\end{description}
+
+In addition to this, as noted in Section~\ref{TreeInterpretability} it is desireable to use concise oblique splits wherever possible. Unfortunately, very little attention is given to this by methods from both methodologies. 
+\begin{description}
+\item[Concise oblique splits:] Other than heuristic approaches, it is difficult to apply other approaches to find concise oblique splits when looking for splits with stochastic searches. Indirect search methods on the other hand have great scope for this.
+\end{description}
+Having evaluated the strengths and weakness of existing methods, Chapter~\ref{ObliqueSplitsviaProbabilisticModels} presents an approach that incorporates the best of both methodologies to find oblique splits.

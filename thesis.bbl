@@ -1,0 +1,197 @@
+\begin{thebibliography}{10}
+
+\bibitem{citeulike:849862}
+H.~Akaike.
+\newblock A new look at the statistical model identification.
+\newblock {\em Automatic Control, IEEE Transactions on}, 19(6):716--723, 1974.
+
+\bibitem{axelrod05}
+Ben Axelrod, Stephen Campos, and John Envarli.
+\newblock Perceptron-{B}ased {O}blique {T}rees ({P-BOT}).
+\newblock Master's thesis, Georgia Institute of Technology, 2005.
+
+\bibitem{cart84-2}
+L.~Breiman, J.~H. Friedman, R.~A. Olshen, and C.~J. Stone.
+\newblock {\em Classification and Regression Trees}.
+\newblock Wadsworth and Brooks/Cole, Monterey, CA, 1984.
+
+\bibitem{brodley92multivariatea}
+Carla~E. Brodley and Paul~E. Utgoff.
+\newblock Multivariate decision trees.
+\newblock Technical Report UM-CS-1992-083, University of Massachusetts, , 1992.
+
+\bibitem{brodley92multivariateb}
+Carla~E. Brodley and Paul~E. Utgoff.
+\newblock Multivariate versus univariate decision trees.
+\newblock Technical Report UM-CS-1992-008, University of Massachusetts, 1992.
+
+\bibitem{230524}
+Donald~E. Brown, Clarence~Louis Pittard, and Han Park.
+\newblock Classification trees with optimal multivariate decision nodes.
+\newblock {\em Pattern Recogn. Lett.}, 17(7):699--703, 1996.
+
+\bibitem{cantupaz00using}
+E.~Cantu-Paz and C.~Kamath.
+\newblock Using evolutionary algorithms to induce oblique decision trees.
+\newblock In {\em Proceedings of the Genetic and Evolutionary Computation
+  Conference ({GECCO}-2000)}, pages 1053--1060, Las Vegas, Nevada, USA, 10-12
+  2000. Morgan Kaufmann.
+
+\bibitem{cantu-paz-inducing}
+E.~Cantu-paz, C.~Kamath, and Senior Member.
+\newblock Inducing oblique decision trees with evolutionary algorithms.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 7:54--68,
+  February 2003.
+
+\bibitem{cerny:1985:thermodynamical}
+V.~Cerny.
+\newblock A thermodynamical approach to the travelling salesman problem: An
+  efficient simulation algorithm.
+\newblock {\em Optimization Theory and Applications}, 45:41--51, 1985.
+
+\bibitem{nla.cat-vn178734}
+A.~Cesalpino.
+\newblock {\em De Plantis Libri XVI}.
+\newblock G. Marescottum, Florentiae, 1583.
+
+\bibitem{Cover65}
+T.~Cover.
+\newblock Geometrical and statistical properties of systems of linear
+  inequalities with applications in pattern recognition.
+\newblock {\em IEEE Transactions on Electronic Computers}, 14:326--334, 1965.
+
+\bibitem{159794}
+Marcus Frean.
+\newblock A ``thermal'' perceptron learning rule.
+\newblock {\em Neural Computation}, 4(6):946--957, 1992.
+
+\bibitem{Geu02}
+P.~Geurts.
+\newblock {\em Contributions to decision tree induction: bias/variance tradeoff
+  and time series classification}.
+\newblock PhD thesis, University of Li\`ege, Belgium, May 2002.
+
+\bibitem{citeulike:161814}
+T.~Hastie, R.~Tibshirani, and J.~H. Friedman.
+\newblock {\em The Elements of Statistical Learning}.
+\newblock Springer, August 2001.
+
+\bibitem{heath93induction}
+D.~G. Heath, S.~Kasif, and S.~Salzberg.
+\newblock Induction of oblique decision trees.
+\newblock In {\em International Joint Conferences on Artificial Intelligence},
+  pages 1002--1007, 1993.
+
+\bibitem{129194}
+J.~H. Holland.
+\newblock {\em Adaptation in natural and artificial systems}.
+\newblock MIT Press, Cambridge, MA, USA, 1992.
+
+\bibitem{kirkpatrick83optimization}
+S.~Kirkpatrick, C.~D. Gelatt, and M.~P. Vecchi.
+\newblock Optimization by simulated annealing.
+\newblock {\em Science, Number 4598, 13 May 1983}, 220, 4598:671--680, 1983.
+
+\bibitem{Loh:1988:TSC}
+Wei-Yin Loh and Nunta Vanichsetakul.
+\newblock Tree-structured classification via generalized discriminant analysis.
+  with a comment by {Leo Breiman} and {Jerome H. Friedman} and with a reply by
+  the authors.
+\newblock {\em Journal of the American Statistical Association},
+  83(403):715--728, 1988.
+
+\bibitem{cullagh-generalized}
+P.~McCullagh and J.~A. Nelder.
+\newblock {\em Generalized Linear Models}.
+\newblock Chapman \& Hall, 2nd edition, 1989.
+
+\bibitem{Moore1965}
+G.~E. Moore.
+\newblock Cramming more components onto integrated circuits.
+\newblock {\em Electronics}, 38(8):114--117, April 1965.
+
+\bibitem{murthy93oc}
+S.~K. Murthy, S.~Kasif, S.~Salzberg, and Beigel.
+\newblock {OC1}: A randomized induction of oblique decision trees.
+\newblock In {\em National Conference on Artificial Intelligence}, pages
+  322--327, 1993.
+
+\bibitem{AnneB.Nattinger04011998}
+A.~B. Nattinger.
+\newblock Current therapy in adult medicine.
+\newblock {\em Annals of Internal Medicine}, 128(7):611--612, 1998.
+
+\bibitem{Quinlan.86}
+J.~R. Quinlan.
+\newblock Induction of decision trees.
+\newblock {\em Machine Learning}, 1:81--106, 1986.
+\newblock [Reprinted in \cite{Shavlik.Dietterich.90}].
+
+\bibitem{Quinlan.88}
+J.~R. Quinlan.
+\newblock Decision trees and multi-valued attributes.
+\newblock In J.~E. Hayes, D.~Michie, and J.~Richards, editors, {\em Machine
+  Intelligence 11}, pages 305--318, Oxford, 1988. Clarendon Press.
+
+\bibitem{Quinlan.90}
+J.~R. Quinlan.
+\newblock Decision trees and decision making.
+\newblock {\em IEEE Transactions on Systems, Man and Cybernetics}, 20:339--346,
+  1990.
+
+\bibitem{R}
+{R Development Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2008.
+\newblock {ISBN} 3-900051-07-0.
+
+\bibitem{Ripley.96}
+B.~D. Ripley.
+\newblock {\em Pattern Recognition and Neural Networks}.
+\newblock Cambridge University Press, Cambridge, 1996.
+
+\bibitem{rosenblatt58}
+Frank Rosenblatt.
+\newblock The perceptron: a probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em Psychological Review}, 65(6):386--408, 1958.
+
+\bibitem{citeulike:90008}
+Gideon Schwarz.
+\newblock Estimating the dimension of a model.
+\newblock {\em The Annals of Statistics}, 6(2):461--464, 1978.
+
+\bibitem{Sethi.Sarvarayudu.82}
+I.~K. Sethi and G.~P.~R. Sarvarayudu.
+\newblock Hierarchical classifier design using mutual information.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  4:441--445, 1982.
+
+\bibitem{Shavlik.Dietterich.90}
+J.~W. Shavlik and T.~G. Dietterich, editors.
+\newblock {\em Readings in Machine Learning}.
+\newblock Morgan Kaufmann, San Mateo, CA, 1990.
+
+\bibitem{tan04}
+P.~Tan and D.~Dowe.
+\newblock {MML} inference of oblique decision trees.
+\newblock {\em Proceedings of the 17th Australian Joint Conference on
+  Artificial Intelligence}, pages 1082--1088, 2004.
+
+\bibitem{nla.cat-vn2380672}
+J.~Pitton~de Tournefort.
+\newblock {\em Institutiones Rei Herbariae}.
+\newblock Typographia Regia, 1719.
+
+\bibitem{utgoff91linear}
+Paul~E. Utgoff and Carla~E. Brodley.
+\newblock {L}inear {M}achine {D}ecision {T}rees.
+\newblock Technical report, University of Massachusetts, Amherst, MA, USA,
+  1991.
+
+\bibitem{609112}
+M.~\v{S}progar, M.~Leni\v{c}, and S.~Alayon.
+\newblock Evolution in medical decision making.
+\newblock {\em Journal of Medical Systems}, 26(5):479--489, 2002.
+
+\end{thebibliography}

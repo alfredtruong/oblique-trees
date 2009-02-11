@@ -1,0 +1,101 @@
+\relax 
+\citation{nla.cat-vn178734}
+\citation{nla.cat-vn2380672}
+\citation{609112}
+\citation{AnneB.Nattinger04011998}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{6}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{Background}{{2}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Classification Trees}{6}}
+\newlabel{ClassificationTrees}{{2.1}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Natural Origins}{6}}
+\newlabel{NaturalOrigins}{{2.1.1}{6}}
+\newlabel{fig_taxonomy_key_biology_table}{{2.1(a)}{7}}
+\newlabel{sub@fig_taxonomy_key_biology_table}{{(a)}{7}}
+\newlabel{fig_taxonomy_key_biology_tree}{{2.1(b)}{7}}
+\newlabel{sub@fig_taxonomy_key_biology_tree}{{(b)}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Tree-based classification is a natural way of classifying hierarchical populations and has long been used by practitioners from various fields. A Dichotomous Taxonomic Keys in particular ask a series of questions with \emph  {Yes} or \emph  {No} answers as shown in Figure\nobreakspace  {}2.1(a)\hbox {}. It is easy to follow and each path leads to a class prediction. This information can also be represented by a tree (where left branches by convention denote positive answers).}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Taxonomic Key for various species of plants.}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Graphical representation of information contained in Taxonomic Key.}}}{7}}
+\newlabel{fig_taxonomy_key_biology}{{2.1}{7}}
+\citation{Quinlan.86}
+\citation{Quinlan.88}
+\citation{Quinlan.90}
+\citation{cart84-2}
+\citation{Sethi.Sarvarayudu.82}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Tree Growth}{8}}
+\newlabel{TreeGrowth}{{2.1.2}{8}}
+\newlabel{fig_typical_CART_tree_plot_tree}{{2.2(a)}{9}}
+\newlabel{sub@fig_typical_CART_tree_plot_tree}{{(a)}{9}}
+\newlabel{fig_typical_CART_tree_decision_boundaries}{{2.2(b)}{9}}
+\newlabel{sub@fig_typical_CART_tree_decision_boundaries}{{(b)}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces The above tree is grown to a training set where observations have two continuous attributes $p=2$ with observations from four classes $C\in \left \{1,\ldots  ,4\right \}$. Four dichotomous tests are applied at internal nodes to produce five leaves. The classes associated to each leaf are shown at the bottom of a tree. With $p=2$, it is possible to view the associated decision boundaries defined by the tree on the feature space $\ensuremath  {\mathbf  {X}}=\mathbb  {R}^2$. As axis-parallel splits are used to partition observations, the feature space is partitioned with rectangular blocks.}}{9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Example of a binary splitting axis-parallel tree.}}}{9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {The associated decision boundaries defined by the tree on the feature space.}}}{9}}
+\newlabel{fig_typical_CART_tree}{{2.2}{9}}
+\citation{Geu02}
+\citation{citeulike:161814}
+\citation{cart84-2}
+\citation{cart84-2}
+\citation{Ripley.96}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Cost-Complexity Pruning}{12}}
+\newlabel{CostComplexityPruning}{{2.1.3}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A 3-levelled saturated tree is shown in the top-left plot with its nodes labeled. The other plots show its rooted subtrees, rows 1 to 4 showing those where neither nodes 2 and 3 are absent, row 5 showing those where only node 3 is absent, row 6 showing those where only node 2 is absent and the rest follow on the last row. One sees that the total number of rooted subtrees grows in a multiplicative manner with each additional internal node.}}{13}}
+\newlabel{fig_rooted_subtrees}{{2.3}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Cost-complexity pruning allows trees that generalize well to be found. Instead of stopping recursive partitioning early, cost-complexity pruning allows a tree to be fully grown (and thus overfit) to training data. A family of rooted subtrees $\left \{T_i\right \}_{i=0}^K$ with unique properties can then be extracted from this maximal tree. Each each tree in the tree sequence $\left \{T_i\right \}_{i=0}^K$ is nested and each tree $T_i$ minimizes $R_k(T)$ over a range of values $k\in [k_i,k_{i+1})$. Though prediction error over the training set increases as $k$ increases, out-of-sample prediction error needed not. The tree with the lowest out-of-sample prediction error (the best generalizing tree) is easily found and can be used as the final classifier. $T_1$ might have the lowest out-of-sample prediction error say and be chosen as the final classifier.}}{14}}
+\newlabel{fig_tree_pruning}{{2.4}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Tree Interpretability}{14}}
+\newlabel{TreeInterpretability}{{2.2}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces The interpretability of a tree depends on two factors, the interpretability of each split in isolation and its cumulative effect over the entire tree. A better balance can be struck between using simple tests that are easy to understand and more complex tests that allow smaller trees to be grown.}}{15}}
+\newlabel{fig_tree_interpretability}{{2.5}{15}}
+\newlabel{fig_power_of_splits_oblique}{{2.6(a)}{16}}
+\newlabel{sub@fig_power_of_splits_oblique}{{(a)}{16}}
+\newlabel{fig_power_of_splits_axis_parallel}{{2.6(b)}{16}}
+\newlabel{sub@fig_power_of_splits_axis_parallel}{{(b)}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Observations from this two-class classification problem are easily partitioned with a single oblique split as shown in Figure\nobreakspace  {}2.6(a)\hbox {}. A single axis-parallel split however cannot produce the same partitioning and requires another level of splits to achieve the same result as shown in Figure\nobreakspace  {}2.6(b)\hbox {}. Oblique splits are better able at partitioning observations so trees grown using them should be smaller than those grown using axis-parallel splits.}}{16}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {A single oblique split is enough to partition observations in this example.}}}{16}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {An axis-parallel tree requires more splits to achieve the same partitioning of observations as a single oblique split.}}}{16}}
+\newlabel{fig_power_of_splits}{{2.6}{16}}
+\citation{Cover65}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Finding Oblique Splits}{17}}
+\newlabel{FindingObliqueSplits}{{2.3}{17}}
+\newlabel{fig_split_dictionary_axis_parallel}{{2.7(a)}{18}}
+\newlabel{sub@fig_split_dictionary_axis_parallel}{{(a)}{18}}
+\newlabel{fig_split_dictionary_oblique}{{2.7(b)}{18}}
+\newlabel{sub@fig_split_dictionary_oblique}{{(b)}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces  A split dictionary for a family of splits is a set of splits of minimal size that produces all possible partitioning of observations permitted by that family of splits over the training set. Though split dictionaries need not be unique (small perturbations of splits result in unique split dictionaries), its size remains constant for a given dataset. Figure\nobreakspace  {}2.7(a)\hbox {} shows a possible axis-parallel split dictionary for a small dataset of size 5. No other partitioning of observations with axis-parallel splits can result other than those generated here. Figure\nobreakspace  {}2.7(b)\hbox {} shows a possible oblique split dictionary on the same training set of size 15. As oblique splits are more flexible, many other partitions of observations can be generated.}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Example of an axis-parallel split dictionary.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Example of an oblique split dictionary.}}}{18}}
+\newlabel{fig_split_dictionaries}{{2.7}{18}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Possible Reasons for the Status Quo}{19}}
+\newlabel{PossibleReasonsfortheStatusQuo}{{2.4}{19}}
+\@setckpt{Chapter2}{
+\setcounter{page}{21}
+\setcounter{equation}{0}
+\setcounter{enumi}{0}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{7}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{2}
+\setcounter{section}{4}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{7}
+\setcounter{table}{0}
+\setcounter{parentequation}{0}
+\setcounter{subfigure}{0}
+\setcounter{lofdepth}{1}
+\setcounter{subtable}{0}
+\setcounter{lotdepth}{1}
+\setcounter{float@type}{8}
+\setcounter{algorithm}{0}
+\setcounter{ALC@line}{0}
+\setcounter{ALC@rem}{0}
+\setcounter{ALC@depth}{0}
+}

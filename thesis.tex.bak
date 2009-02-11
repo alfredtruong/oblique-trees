@@ -1,0 +1,121 @@
+\documentclass[12pt]{report}
+
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{psfrag,amsmath,amsthm,graphicx,subfigure}
+\usepackage[round]{natbib}
+\usepackage{vmargin}
+
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+
+\setpapersize{A4}
+\setmarginsrb{3.6cm}{1.95cm}{2.5cm}{1.95cm}{1cm}{1cm}{1cm}{2cm}
+\renewcommand{\headrulewidth}{0.2pt}
+
+\newenvironment{romanpages}
+{\cleardoublepage\setcounter{page}{1}\renewcommand{\thepage}{\roman{page}}}
+{\cleardoublepage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}}
+
+%\graphicspath{{Figures/}}
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{Note}{Note}[section]
+%\newtheorem{Corollary}{Corollary}[section]
+
+\newcommand{\Xb}{\ensuremath{\mathbf{X}}}
+
+% __________________________________________________________________
+
+\begin{document}
+
+\begin{titlepage}
+
+\LARGE \centerline{\bf Fast Growing and Interpretable Oblique Trees \rm }
+\LARGE \centerline{\bf via Logistic Regression Models \rm }
+\vspace{3em}
+\large \centerline{Alfred Truong}
+\vspace{0.5em}
+\large \centerline{Christ Church College}
+\vspace{0.5em}
+\large \centerline{University of Oxford}
+\vspace{2em}
+\begin{figure} [h!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Oxlogo_BW_lg.eps}
+\end{center}
+\end{figure}
+\vspace{2em}
+\large \centerline{\emph{A Thesis submitted for the degree of Doctor of Philosophy}}
+\vspace{3em}
+\large \centerline{Hilary Term 2009}
+
+\end{titlepage}
+
+\pagebreak
+\thispagestyle{empty}
+
+\vspace*{17cm}
+
+Acknowledgements
+
+\pagebreak
+\thispagestyle{empty}
+
+\begin{center}
+\large \bf Fast Growing and Interpretable Oblique Trees via Logistic Regression Models
+\end{center}
+\vspace*{0.5cm}
+\centerline{\bf Alfred Truong, Christ Church College}
+\vspace*{0.5cm}
+\centerline{\bf DPhil thesis, Department of Statistics}
+\vspace*{0.5cm}
+\centerline{\bf Hilary Term 2009}
+\vspace*{0.5cm}
+
+The key strength of classification trees is its interpretability which diminishes as trees grow larger. The reason why some trees are larger than others comes down to the interplay between how observations of different classes are distributed and the types of splits we use to partition them. Widely used methods of tree growth consider axis-parallel splits over continuous attributes ($X_i<c$). Though oblique splits ($\sum_i a_iX_i<c$) are better suited to partitioning observations, they are also much more computationally intensive to use. Though many have found ways of growing trees with oblique splits, these methods have not caught on. Possible reasons for this include the archaic approaches applied to finding oblique splits, poor interpretability of resulting oblique trees and the difficulty in obtaining widely accessible code. This thesis addresses each of these points by presenting a new approach to finding oblique splits that is intuitively appealing and easily extensible. By adapting tree-growth and tree-pruning techniques, more interpretable oblique trees can be obtained. 
+
+\pagebreak
+\thispagestyle{empty}
+\vspace*{7cm}
+\section*{Declaration}
+I declare that this thesis is wholly my own work unless otherwise stated. No part of this thesis has been accepted or is currently being submitted for any degree or diploma or certificate or other qualification in this university or elsewhere.\\\\
+Candidate: Alfred TRUONG\\\\
+Signed:\\\\
+Date:\\\\
+
+%\pagebreak
+
+\begin{romanpages}
+\doublespacing
+\tableofcontents
+%\listoffigures
+%\listoftables
+\end{romanpages}
+
+% __________________________________________________________________________
+
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\pagestyle{fancy}
+
+\doublespacing
+\include{Chapter1}
+\include{Chapter2}
+\include{Chapter3}
+\include{Chapter4}
+\include{Chapter5}
+\include{Chapter6}
+\include{Chapter7}
+\singlespacing
+
+\pagestyle{plain}
+
+\bibliography{bib}
+\bibliographystyle{plain}
+
+\end{document}

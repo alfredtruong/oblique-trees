@@ -1,0 +1,358 @@
+rm(list=ls())
+library(MASS)
+library(tree)
+library(nnet)
+	crabs.pca=princomp(crabs[,4:8])
+	crabs.pca.predict=predict(crabs.pca)
+	pairs(crabs.pca.predict,col=rep(1:4,each=50))
+	crabs.data=crabs.pca.predict[,2:3]
+	windows(); plot(crabs.data,type="n");text(crabs.data,col=rep(1:4,each=50),labels=rep(1:4,each=50),cex=0.5)
+	crabs.data=data.frame(crabs.data,factor(rep(1:4,each=50)))
+	names(crabs.data)=c("X1","X2","C")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dat=model.frame(C~.,crabs.data)
+
+	p=dim(dat)[2]-1									#number of attributes
+	#apart from class variable, find all categoric variables
+	#find best categorical split
+	categoric=rep(FALSE,p+1)
+	for(i in 2:(p+1))
+	{
+		#search for all categorical variables
+		if (class(dat[,i])[1]=="factor")
+		{
+			categoric[i]=TRUE
+		}
+	}
+	#find all ordered categoric variables
+	ordered.categoric=rep(FALSE,p+1)
+	for(i in 2:(p+1))
+	{
+		#search for all ordered categorical variables
+		if (class(dat[,i])[1]=="ordered")
+		{
+			ordered.categoric[i]=TRUE
+		}
+	}
+	#find all continuous variables
+	continuous=rep(FALSE,p+1)
+	for(i in 2:(p+1))
+	{
+		#search for all continuous variables
+		continuous[i]=is.numeric(dat[,i])
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+data=dat
+split.impurity="deviance"
+min.cut=5
+model.selection=FALSE
+initial.model="full"
+
+
+
+
+
+
+
+
+
+
+
+	#subsets() function
+	subsets=function(n, r, s = 1:n) {
+	  if(mode(n) != "numeric" || length(n) != 1
+	     || n < 1 || (n %% 1) != 0) stop("bad value of n")
+	  if(mode(r) != "numeric" || length(r) != 1
+	     || r < 1 || (r %% 1) != 0) stop("bad value of r")
+	  if(!is.atomic(s) || length(s) < n)
+	    stop("s is either non-atomic or too short")
+	  fun <- function(n, r, s)
+	    if(r <= 0) vector(mode(s), 0) else if(r >= n) s[1:n] else
+	    rbind(cbind(s[1], Recall(n - 1, r - 1, s[-1])),
+	          Recall(n - 1, r, s[-1]))
+	  fun(n, r, s)
+	} 
+	#######################################################################
+	impurity.grow=function(class.freq,split.impurity=c("deviance","gini"))
+	#DESCRIPTION
+	#given summarized figures of class frequencies and a split criterion, the impurity measure of such a split is given
+	#INPUT			class.freq		table with class frequencies
+	#			split.impurity		impurity measure to use with which to compare splits
+	#OUTPUT		impurity			numeric impurity value of node with such a composition of examples
+	{
+		#calculate the "impurity" measure on a leaf be it via gini/deviance when given class probabilities at a leaf
+		n=sum(class.freq)
+		class.probs=class.freq/n
+
+		#deviance
+		if (split.impurity=="deviance")
+		{
+			#change any class.probs from 0 to 1 to make 0*log(0)=0 by default
+			class.probs[class.probs==0]=1
+			impurity=-2*sum(class.probs*log(class.probs))
+		}
+
+		#gini
+		if (split.impurity=="gini")
+		{
+			impurity=1-sum(class.probs^2)
+		}
+		return(impurity)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		#find all possible configurations of superclass1 and superclass2
+		#1st class if group, all other classes are continuous
+		temp.levels=levels(factor(data[,1]))
+		g=length(temp.levels)
+		superclass1=vector("list",2^g-2)
+		j=1
+		i=0
+		max=2^(g-1)-1
+		while (i<max)
+			{
+			temp=subsets(g,j)
+			for (k in 1:dim(temp)[1])
+			{
+				superclass1[[k+i]]=temp[k,]
+			}
+			j=j+1
+			i=i+dim(temp)[1]
+		}
+		length(superclass1)=max								#cut off unwanted subsets
+
+		#fit logistic regression classifier for each using each superclass finding hyperplane and impurity value
+		superclass1.hyperplane=vector("list",max)
+		superclass1.average.impurity=rep(Inf,max)						#Inf by default meaning don't use this split
+		temp.glm.variables=vector("list",max)							#list of variables used for each logistic regression classifier
+		child.left=vector("list",max)								#store left children
+		child.right=vector("list",max)								#store right children
+
+
+#browser()
+
+		for (i in 1:max)
+		{
+#WHAT IF PERFECTLY CLASSIFIED!?
+			#create new dataset using correct superclass names
+			temp.g=rep("sc2",times=dim(data)[1])
+			temp.superclass1=data[,1]%in%temp.levels[superclass1[[i]]]
+			temp.g[temp.superclass1]="sc1"
+			temp.data=data.frame(factor(temp.g),data[,-1])
+
+			#do we want to use model selection to optimise fits?
+			if (model.selection!=FALSE)
+			{
+				#want to use model selection
+				#fit logistic regression  classifer to separate superclasses into child.left and child.right from initial model specified by initial.model
+				if (initial.model=="constant")
+				{
+					#start from constant model
+					temp.formula=as.formula(factor.temp.g.~1)
+				} else {
+					#start from full model
+					temp.formula=as.formula(factor.temp.g.~.)
+				}
+
+				temp.glm=glm(	formula=temp.formula,
+						family="binomial",
+						data=temp.data)
+
+				#optimize logistic regression classifier
+				if (model.selection=="AIC")
+				{
+					#use AIC info criterion
+					temp.k=2
+				} else if (model.selection=="BIC") {
+					#use BIC info criterion
+					temp.k=log(dim(temp.data)[1])
+				}
+				temp.glm=stepAIC(	object=temp.glm,
+							scope=list(	lower=~1,
+									upper=as.formula(paste("~",paste(names(data)[-1],collapse=" + ")))),
+							trace=FALSE,
+							k=temp.k)
+				temp.data=temp.glm$model						#pick out variables chosen by stepAIC
+			} else {
+				#o/w, just use fully trained classifier
+				temp.glm=glm(	formula=factor.temp.g.~.,				#fit logistic regression to separate sc1 and sc2
+						family="binomial",
+						data=temp.data)
+			}
+
+			p=length(temp.glm$coefficients)							#number of variables still in use
+			temp.glm.variables[[i]]=names(temp.glm$coefficients)[2:p]				#store variables used for each logistic regression fit
+			temp.hyperplane=temp.glm$coefficients						#coefficients of the optimal separating hyperplane
+			temp.hyperplane.eval=temp.hyperplane[2:p]%*%t(temp.data[,-1])+temp.hyperplane[1]	#multiply with coefficients then add intercept
+			child.left[[i]]=data[temp.hyperplane.eval<=0,]					#examples in left branch
+			child.left[[i]]=data.frame(child.left[[i]][,1],row.names=row.names(child.left[[i]]))	#storing only the class variable
+			child.right[[i]]=data[temp.hyperplane.eval>0,]					#examples in right branch
+			child.right[[i]]=data.frame(child.right[[i]][,1],row.names=row.names(child.right[[i]]))	#storing only the class variable
+
+			#ignore all splits with less than min.cut examples in either branch
+			if (dim(child.left[[i]])[1]>=min.cut && dim(child.right[[i]])[1]>=min.cut)
+			{
+				#consider this split, sufficient examples in children
+				#evaluate average impurity of child nodes
+				child.left.impurity=impurity.grow(class.freq=table(child.left[[i]][1]))
+				child.right.impurity=impurity.grow(class.freq=table(child.right[[i]][1]))
+				average.impurity=(child.left.impurity*dim(child.left[[i]])[1]+child.right.impurity*dim(child.right[[i]])[1])/dim(data)[1]	#dont really need to normalise by node.n
+				superclass1.hyperplane[[i]]=temp.hyperplane
+				superclass1.average.impurity[i]=average.impurity
+			}
+			#otherwise don't consider split (by default)
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############PLOT TO POSTSCRIPT FILES#################
+postscript(file="fig_superclass1_1.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{1}{2,3,4}",cex.main=2)
+	i=1;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_2.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{2}{1,3,4}",cex.main=2)
+	i=2;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_3.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{3}{1,2,4}",cex.main=2)
+	i=3;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_4.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{4}{1,2,3}",cex.main=2)
+	i=4;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_12.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{1,2}{3,4}",cex.main=2)
+	i=5;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_13.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{1,3}{2,4}",cex.main=2)
+	i=6;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+postscript(file="fig_superclass1_14.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="{1,4}{2,3}",cex.main=2)
+	i=7;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+dev.off()
+
+
+
+#############PLOT TO SAME X11 DEVICE#################
+x11();par(mfrow=c(2,4))
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{1}{2,3,4}")
+i=1;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{2}{1,3,4}")
+i=2;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{3}{1,2,4}")
+i=3;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{4}{1,2,3}")
+i=4;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{1,2}{3,4}")
+i=5;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{1,3}{2,4}")
+i=6;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+plot(crabs.data[,1:2],type="n")
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="{1,4}{2,3}")
+i=7;b=superclass1.hyperplane[[i]];abline(-b[1:2]/b[3])
+
+#i=7;b=superclass1.hyperplane[[i]];abline(a=b[1],b=0)

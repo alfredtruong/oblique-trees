@@ -1,0 +1,111 @@
+rm(list=ls())
+library(MASS)
+library(tree)
+library(nnet)
+	crabs.pca=princomp(crabs[,4:8])
+	crabs.pca.predict=predict(crabs.pca)
+	pairs(crabs.pca.predict,col=rep(1:4,each=50))
+	crabs.data=crabs.pca.predict[,2:3]
+	windows(); plot(crabs.data,type="n");text(crabs.data,col=rep(1:4,each=50),labels=rep(1:4,each=50),cex=0.5)
+	crabs.data=data.frame(crabs.data,factor(rep(1:4,each=50)))
+	names(crabs.data)=c("pc2","pc3","g")
+
+
+
+#windows();par(mfrow=c(1,3))
+
+#CRABS AXIS PARALLEL
+	#grow the tree
+	crabs.ax.tree <- tree(g~.,crabs.data)
+	x11()
+	plot(crabs.ax.tree)
+	text(crabs.ax.tree)
+
+	#plot the decision boundaries
+	postscript(file="fig.tree.comparison.crabs.ax.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+	par(mar=c(5.1,4.1,4.1,2.1))
+	plot(crabs.data[,1:2],type="n")
+	text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+	title(main="Axis Parallel Tree")
+	#crabs.t=tree(g~.,crabs.data)
+	lines(x=c(-.370909,-.370909),y=c(-10,10))
+	lines(x=c(-10,-.370909),y=c(-.495977,-.495977))
+	lines(x=c(-1.13092,-1.13092),y=c(-10,-.495977))
+	lines(x=c(-.370909,10),y=c(.451786,.451786))
+	lines(x=c(.4492,.4492),y=c(.451786,-10))
+	lines(x=c(.149344,.149344),y=c(.451786,-10))
+	dev.off()
+
+#CRABS OBLIQUE
+postscript(file="fig.tree.comparison.crabs.ob.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+par(mar=c(5.1,4.1,4.1,2.1))
+plot(crabs.data[,1:2],type="n");
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="FCOT Tree")
+#crabs.ot=oblique.tree(g~.,crabs.data)
+i=1;b=crabs.ot$details[[i]][[1]];abline(-b[1:2]/b[3])
+ii=2;
+B=-matrix(c(crabs.ot$details[[i]][[1]][1],crabs.ot$details[[ii]][[1]][1]),nrow=2)
+A=matrix(c(crabs.ot$details[[i]][[1]][-1],crabs.ot$details[[ii]][[1]][-1]),byrow=TRUE,nrow=2)
+ANS=solve(A)%*%B
+lines(x=c(ANS[1],-5),y=c(ANS[2],(-crabs.ot$details[[ii]][[1]][1]-crabs.ot$details[[ii]][[1]][2]*-5)/crabs.ot$details[[ii]][[1]][3]))
+iii=5;
+B=-matrix(c(crabs.ot$details[[i]][[1]][1],crabs.ot$details[[iii]][[1]][1]),nrow=2)
+A=matrix(c(crabs.ot$details[[i]][[1]][-1],crabs.ot$details[[iii]][[1]][-1]),byrow=TRUE,nrow=2)
+ANS=solve(A)%*%B
+lines(x=c(ANS[1],-5),y=c(ANS[2],(-crabs.ot$details[[iii]][[1]][1]-crabs.ot$details[[iii]][[1]][2]*-5)/crabs.ot$details[[iii]][[1]][3]))
+dev.off()
+
+#CRABS OBLIQUE OPTIMISED
+postscript(file="fig.tree.comparison.crabs.ob.opt.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+par(mar=c(5.1,4.1,4.1,2.1))
+plot(crabs.data[,1:2],type="n");
+text(crabs.data[,1:2],labels=crabs.data[,3],col=as.numeric(crabs.data[,3]),cex=.5)
+title(main="Optimised FCOT Tree")
+#crabs.ot.step=oblique.tree(g~.,crabs.data,stepaic=TRUE)
+i=1;b=crabs.ot.step$details[[i]][[1]];abline(-b[1:2]/b[3])
+ii=2;
+B=-matrix(c(crabs.ot.step$details[[i]][[1]][1],-0.396342),nrow=2)
+A=matrix(c(crabs.ot.step$details[[i]][[1]][-1],c(1,0)),byrow=TRUE,nrow=2)
+ANS=solve(A)%*%B
+lines(x=c(ANS[1],ANS[1]),y=c(ANS[2],-10))
+iii=5;
+B=-matrix(c(crabs.ot.step$details[[i]][[1]][1],0.373614),nrow=2)
+A=matrix(c(crabs.ot.step$details[[i]][[1]][-1],c(1,0)),byrow=TRUE,nrow=2)
+ANS=solve(A)%*%B
+lines(x=c(ANS[1],ANS[1]),y=c(ANS[2],10))
+dev.off()
+
+#TRAINING ERRORS
+z=table(predict(crabs.t,type="class"),crabs.data[,3])
+sum(z)-sum(diag(z));sum(z)
+zz=table(predict.oblique.tree(crabs.ot,type="class"),crabs.data[,3])
+sum(zz)-sum(diag(zz));sum(zz)
+zzz=table(predict.oblique.tree(crabs.ot.step,type="class"),crabs.data[,3])
+sum(zzz)-sum(diag(zzz));sum(zzz)
+
+#DECISION TREES
+#windows();par(mfrow=c(1,3))
+postscript(file="fig.tree.comparison.crabs.ax.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+plot(crabs.t);title(main="Axis Parallel Tree");text(crabs.t,cex=0.7)
+dev.off()
+
+postscript(file="fig.tree.comparison.crabs.ob.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+plot(crabs.ot);title(main="FCOT Tree");text(crabs.ot,cex=0.7)
+dev.off()
+
+postscript(file="fig.tree.comparison.crabs.ob.opt.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+plot(crabs.ot.step);title(main="Optimised FCOT Tree");text(crabs.ot.step,cex=0.7)
+dev.off()
+
+#TEST ERRORS
+rand=sample(10,200,replace=TRUE)
+cv.tree(crabs.t,rand=rand,method="misclass")
+cv.oblique.tree(crabs.ot,rand=rand,prune.impurity="misclass")
+cv.oblique.tree(crabs.ot.step,rand=rand,prune.impurity="misclass")

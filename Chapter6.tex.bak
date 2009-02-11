@@ -1,0 +1,19 @@
+\chapter{Additional Points}
+\label{AdditionalPoints}
+There are several issues related to the use of this method on real datasets I want to bring forth in this chapter. This section will be divided into strengths and weaknesses of the method.\\
+
+\section{Strengths}
+\label{Strengths}
+\subsection{Rotational Invariance (ANOTHER 2 PAGES)}
+\label{Rotational Invariance}
+By allowing oblique splits, oblique trees are invariant to rotations in the dataset unlike axis-parallel trees. It would be useful to demonstrate this by rotating a dataset and growing axis-parallel and oblique trees on them to show this invariance.\\
+
+\section{Weakness}
+\label{Weakness}
+\subsection{Poor Oblique Splits (ANOTHER 5 PAGES)}
+\label{PoorObliqueSplits}
+I believe that are times when the approach taken in Section~\ref{ObliqueSplitsviaProbabilisticModels} may fail to provide good oblique splits. Situations include the case where class data is non-contiguous, and non-spherical. If this were the case, oblique splits found in this way are not attracted to areas of low impurity values. This needs to be investigated further.\\
+
+\subsection{Complexity Analysis (ANOTHER 3 PAGES)}
+\label{ComplexityAnalysis}
+A investigation on the computational complexity of techniques mentioned in this thesis needs to be done. This should highlight situations where this approach to growing oblique trees does not perform well. A definite area of weakness includes the case where there are a great number of classes in the classification dataset. It may also perform poorly in the situation where there are many continuous attributes also. May also include comparison with existing methods of oblique tree growth.\\

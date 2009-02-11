@@ -1,0 +1,792 @@
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=latex 2009.2.10)  11 FEB 2009 15:43
+entering extended mode
+**thesis.tex
+(thesis.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2008-06-18, ngerman-x-2008-06-18, french, loaded.
+("C:\Program Files\MiKTeX 2.7\tex\latex\base\report.cls"
+Document Class: report 2005/09/16 v1.4f Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.7\tex\latex\base\size12.clo"
+File: size12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\setspace\setspace.sty"
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+) ("C:\Program Files\MiKTeX 2.7\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip43
+\f@ncyO@elh=\skip44
+\f@ncyO@erh=\skip45
+\f@ncyO@olh=\skip46
+\f@ncyO@orh=\skip47
+\f@ncyO@elf=\skip48
+\f@ncyO@erf=\skip49
+\f@ncyO@olf=\skip50
+\f@ncyO@orf=\skip51
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\psfrag\psfrag.sty"
+Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\graphics\graphics.sty"
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 90.
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\graphics\dvips.def"
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\pfg@pcount=\count88
+\pfg@scount=\count89
+\pfg@temp=\write3
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks14
+\ex@=\dimen103
+))
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count90
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count91
+\leftroot@=\count92
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count93
+\DOTSCASE@=\count94
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count95
+\c@MaxMatrixCols=\count96
+\dotsspace@=\muskip10
+\c@parentequation=\count97
+\dspbrk@lvl=\count98
+\tag@help=\toks15
+\row@=\count99
+\column@=\count100
+\maxfields@=\count101
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks19
+\thm@bodyfont=\toks20
+\thm@headfont=\toks21
+\thm@notefont=\toks22
+\thm@headpunct=\toks23
+\thm@preskip=\skip55
+\thm@postskip=\skip56
+\thm@headsep=\skip57
+\dth@everypar=\toks24
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\subfigure\subfigure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip58
+\subfigcapskip=\skip59
+\subfigcaptopadj=\dimen114
+\subfigbottomskip=\skip60
+\subfigcapmargin=\dimen115
+\subfiglabelskip=\skip61
+\c@subfigure=\count102
+\c@lofdepth=\count103
+\c@subtable=\count104
+\c@lotdepth=\count105
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+("C:\Program Files\MiKTeX 2.7\tex\latex\subfigure\subfigure.cfg")
+\subfig@top=\skip62
+\subfig@bottom=\skip63
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\ieeepes\vmargin.sty"
+Package: vmargin 1999/06/01
+
+Package `vmargin', V2.2, <1999/06/01>
+\PaperWidth=\dimen116
+\PaperHeight=\dimen117
+) ("C:\Program Files\MiKTeX 2.7\tex\latex\algorithms\algorithm.sty"
+Package: algorithm 
+
+Document Style `algorithm' - floating environment
+("C:\Program Files\MiKTeX 2.7\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count106
+\float@exts=\toks26
+\float@box=\box28
+\@float@everytoks=\toks27
+\@floatcapt=\box29
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks28
+\c@algorithm=\count107
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\algorithms\algorithmic.sty"
+Package: algorithmic 2006/06/02
+
+Document Style `algorithmic' - environment
+("C:\Program Files\MiKTeX 2.7\tex\latex\tools\calc.sty"
+Package: calc 2005/08/06 v4.2 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count108
+\calc@Bcount=\count109
+\calc@Adimen=\dimen118
+\calc@Bdimen=\dimen119
+\calc@Askip=\skip64
+\calc@Bskip=\skip65
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count110
+\calc@Cskip=\skip66
+)
+\c@ALC@line=\count111
+\c@ALC@rem=\count112
+\c@ALC@depth=\count113
+\ALC@tlm=\skip67
+\algorithmicindent=\skip68
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+)
+("C:\Program Files\MiKTeX 2.7\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks29
+\verbatim@line=\toks30
+\verbatim@in@stream=\read1
+) (thesis.aux
+(Chapter1.aux) (Chapter2.aux) (Chapter3.aux) (Chapter4.aux) (Chapter5.aux)
+(Chapter6.aux) (Chapter7.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+File: Oxlogo_BW_lg.eps Graphic file (type eps)
+ <Oxlogo_BW_lg.eps> [1
+
+] [1]
+LaTeX Font Info:    Try loading font information for U+msa on input line 79.
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 79.
+
+("C:\Program Files\MiKTeX 2.7\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+) [2]
+Underfull \hbox (badness 10000) in paragraph at lines 85--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--89
+
+ []
+
+[3] (thesis.toc [1
+
+
+] [2])
+\tf@toc=\write4
+ [3]
+
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 100.
+
+
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 102.
+
+(Chapter1.tex
+Chapter 1.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[1
+
+
+
+]
+File: fig_typical_classifier.eps Graphic file (type eps)
+ <fig_typical_classifier.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 30--31
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+
+ []
+
+) [5] (Chapter2.tex
+Chapter 2.
+File: fig_taxonomy_key_biology_table.eps Graphic file (type eps)
+<fig_taxonomy_key_biology_table.eps>
+File: fig_taxonomy_key_biology_tree.ps Graphic file (type eps)
+ <fig_taxonomy_key_biology_tree.ps>
+Underfull \hbox (badness 2205) in paragraph at lines 19--19
+[][]\OT1/cmr/m/n/10 (b) Graph-i-cal rep-re-sen-ta-tion of in-for-ma-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--24
+
+ []
+
+[6
+
+
+
+] [7]
+File: fig_typical_CART_tree_plot_tree.ps Graphic file (type eps)
+ <fig_typical_CART_tree_plot_tree.ps>
+File: fig_typical_CART_tree_decision_boundaries.ps Graphic file (type eps)
+
+<fig_typical_CART_tree_decision_boundaries.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 39--54
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
+
+ []
+
+[8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 80--83
+
+ []
+
+[11]
+File: fig_rooted_subtrees.ps Graphic file (type eps)
+ <fig_rooted_subtrees.ps>
+
+LaTeX Warning: Float too large for page by 6.60341pt on input line 89.
+
+[12] [13]
+File: fig_tree_pruning.ps Graphic file (type eps)
+ <fig_tree_pruning.ps>
+File: fig_tree_interpretability_more.ps Graphic file (type eps)
+ <fig_tree_interpretability_more.ps>
+File: fig_tree_interpretability_less.ps Graphic file (type eps)
+
+<fig_tree_interpretability_less.ps> [14]
+File: fig_power_of_splits_oblique.ps Graphic file (type eps)
+ <fig_power_of_splits_oblique.ps>
+File: fig_power_of_splits_axis_parallel.ps Graphic file (type eps)
+
+<fig_power_of_splits_axis_parallel.ps> [15]
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
+
+ []
+
+[16]
+File: fig_split_dictionary_axis_parallel.eps Graphic file (type eps)
+ <fig_split_dictionary_axis_parallel.eps>
+File: fig_split_dictionary_oblique.eps Graphic file (type eps)
+
+<fig_split_dictionary_oblique.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 135--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
+
+ []
+
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 154.
+
+
+Underfull \hbox (badness 3449) in paragraph at lines 154--154
+[][]\OT1/cmr/m/n/10 Given $\OML/cmm/m/it/10 L[]$ \OT1/cmr/m/n/10 gen-er-ally po
+-si-tioned points in $\OML/cmm/m/it/10 q$\OT1/cmr/m/n/10 -dimensional space, th
+ere are ex-actly
+ []
+
+
+Overfull \hbox (19.63669pt too wide) in paragraph at lines 154--155
+\OT1/cmr/m/n/12 cult. For-tu-nately how-ever its size has been shown to be ex-a
+ctly $[] \OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
+
+ []
+
+[17] [18] [19]) [20] (Chapter3.tex
+Chapter 3.
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[21
+
+
+
+]
+Overfull \hbox (19.8204pt too wide) in paragraph at lines 20--21
+[][]\OT1/cmr/m/n/12 hill-climbing ideas can be ap-plied to stochas-ti-cally fin
+d good lo-cal max-ima/minima
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 158--160
+
+ []
+
+[23] [24] [25]
+
+LaTeX Warning: Reference `' on page 26 undefined on input line 170.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
+
+ []
+
+[26] [27] [28] [29] [30] [31]) [32] [33] (Chapter4.tex
+Chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+[34
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+
+ []
+
+File: fig_superclass1_1.ps Graphic file (type eps)
+<fig_superclass1_1.ps>
+File: fig_superclass1_2.ps Graphic file (type eps)
+ <fig_superclass1_2.ps>
+File: fig_superclass1_3.ps Graphic file (type eps)
+ <fig_superclass1_3.ps>
+File: fig_superclass1_4.ps Graphic file (type eps)
+
+<fig_superclass1_4.ps>
+File: fig_superclass1_12.ps Graphic file (type eps)
+ <fig_superclass1_12.ps>
+File: fig_superclass1_13.ps Graphic file (type eps)
+ <fig_superclass1_13.ps>
+File: fig_superclass1_14.ps Graphic file (type eps)
+
+<fig_superclass1_14.ps>
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 28.
+ ("C:\Program Files\MiKTeX 2.7\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+
+ []
+
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 30--31
+
+ []
+
+[36] [37]
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+
+ []
+
+[38]
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
+
+ []
+
+File: oblique_splits_crabs_original_off_tree.ps Graphic file (type eps)
+<oblique_splits_crabs_original_off_tree.ps>
+File: oblique_splits_crabs_original_on_tree.ps Graphic file (type eps)
+
+<oblique_splits_crabs_original_on_tree.ps>
+File: oblique_splits_crabs_original_only_tree.ps Graphic file (type eps)
+
+<oblique_splits_crabs_original_only_tree.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
+
+ []
+
+[40]
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+
+ []
+
+File: oblique_splits_crabs_augmented_off_tree.ps Graphic file (type eps)
+<oblique_splits_crabs_augmented_off_tree.ps>
+File: oblique_splits_crabs_augmented_off_decision_boundaries.ps Graphic file (t
+ype eps)
+
+<oblique_splits_crabs_augmented_off_decision_boundaries.ps>
+File: oblique_splits_crabs_augmented_on_tree.ps Graphic file (type eps)
+
+<oblique_splits_crabs_augmented_on_tree.ps>
+File: oblique_splits_crabs_augmented_on_decision_boundaries.ps Graphic file (ty
+pe eps)
+
+<oblique_splits_crabs_augmented_on_decision_boundaries.ps>
+File: oblique_splits_crabs_augmented_only_tree.ps Graphic file (type eps)
+
+<oblique_splits_crabs_augmented_only_tree.ps>
+File: oblique_splits_crabs_augmented_only_decision_boundaries.ps Graphic file (
+type eps)
+
+<oblique_splits_crabs_augmented_only_decision_boundaries.ps> [41] [42]
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
+
+ []
+
+File: oblique_splits_pima_off_tree.ps Graphic file (type eps)
+<oblique_splits_pima_off_tree.ps>
+File: oblique_splits_pima_on_tree.ps Graphic file (type eps)
+ <oblique_splits_pima_on_tree.ps>
+File: oblique_splits_pima_only_tree.ps Graphic file (type eps)
+
+<oblique_splits_pima_only_tree.ps>
+File: oblique_splits_pima_off_tree_skeleton.ps Graphic file (type eps)
+ <oblique_splits_pima_off_tree_skeleton.ps>
+File: oblique_splits_pima_on_tree_skeleton.ps Graphic file (type eps)
+
+<oblique_splits_pima_on_tree_skeleton.ps>
+File: oblique_splits_pima_only_tree_skeleton.ps Graphic file (type eps)
+
+<oblique_splits_pima_only_tree_skeleton.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+File: oblique_splits_fgl_off_tree.ps Graphic file (type eps)
+<oblique_splits_fgl_off_tree.ps>
+File: oblique_splits_fgl_on_tree.ps Graphic file (type eps)
+ <oblique_splits_fgl_on_tree.ps>
+File: oblique_splits_fgl_only_tree.ps Graphic file (type eps)
+
+<oblique_splits_fgl_only_tree.ps>
+File: oblique_splits_fgl_off_tree_skeleton.ps Graphic file (type eps)
+ <oblique_splits_fgl_off_tree_skeleton.ps>
+File: oblique_splits_fgl_on_tree_skeleton.ps Graphic file (type eps)
+
+<oblique_splits_fgl_on_tree_skeleton.ps>
+File: oblique_splits_fgl_only_tree_skeleton.ps Graphic file (type eps)
+
+<oblique_splits_fgl_only_tree_skeleton.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+[43] [44] [45]
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+File: impurity_plot_1d_crabs_data_pc2.ps Graphic file (type eps)
+<impurity_plot_1d_crabs_data_pc2.ps>
+File: impurity_plot_1d_crabs_data_pc3.ps Graphic file (type eps)
+ <impurity_plot_1d_crabs_data_pc3.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+
+ []
+
+[46]
+File: impurity_plot_2d_crabs_data_detail_100_bb.ps Graphic file (type eps)
+ <impurity_plot_2d_crabs_data_detail_100_bb.ps>
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
+
+ []
+
+[47] [48]) [49] (Chapter5.tex
+Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+[50
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--30
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+
+ []
+
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+
+ []
+
+[52]
+Underfull \hbox (badness 10000) in paragraph at lines 61--62
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--69
+
+ []
+
+[53]
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+[55]
+File: figconcisetreesandcomp.eps Graphic file (type eps)
+ <figconcisetreesandcomp.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
+
+ []
+
+[56] [57]) [58] (Chapter6.tex
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+
+ []
+
+[59
+
+
+
+]) [60] (Chapter7.tex
+Chapter 7.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+) [61
+
+
+
+] (thesis.bbl [62
+
+
+] [63]) [64] (thesis.aux (Chapter1.aux) (Chapter2.aux)
+(Chapter3.aux) (Chapter4.aux) (Chapter5.aux) (Chapter6.aux) (Chapter7.aux))
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2423 strings out of 95305
+ 30744 string characters out of 1183097
+ 94893 words of memory out of 1500000
+ 5494 multiletter control sequences out of 110000
+ 15839 words of font info for 59 fonts, out of 3000000 for 5000
+ 14 hyphenation exceptions out of 8191
+ 27i,11n,43p,1601b,477s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on thesis.dvi (71 pages, 147068 bytes).

@@ -1,0 +1,104 @@
+\chapter{Interpretable Oblique Trees}
+\label{InterpretableObliqueTrees}
+As interpretability is a key strength of classification trees, it is important to find ways of making oblique trees more interpretable. Apart from simply being small, guarding against unwarranted use of full oblique splits also helps trees to be more interpretable. Various approaches can be used to achieve this. They are categorised into two groups, 
+\begin{description}
+\item[During Tree Growth] methods applied during tree growth and 
+\item[Post-Tree Growth] methods applied post-tree growth.
+\end{description}
+All methods use well-founded feature selection ideas introduced to trees by solving two-class classification problems during tree growth. Section~\ref{DuringTreeGrowth} covers methods applied during tree growth and Section~\ref{PostTreeGrowth} covers those applied post-tree growth.  
+
+\section{During Tree Growth}
+\label{DuringTreeGrowth}
+Having seen how full oblique trees can be grown, it is easy to extend ideas in Chapter~\ref{InterpretableObliqueTrees} to grow concise oblique trees. When looking for the best split at each stage of tree growth, the set of full oblique splits can be substituted with a set of concise oblique splits. Instead of fitting logistic regression classifiers with all continuous attributes to two-class classification problems, feature selection techniques can be applied to remove attributes from the final model. This effectively produces concise oblique splits.\\
+
+There are two established methods of finding succinct classifiers when fitting logistic regression classifiers, 
+\begin{itemize}
+\item Model Selection
+\item Penalised Likelihood
+\end{itemize}
+Section~\ref{ModelSelection} expands on the use of model selection ideas and Section~\ref{PenalisedLikelihood} expands on penalised likelihood.\\
+
+\noindent THE REST OF THIS CHAPTER MUST BE UPDATED\\
+\noindent COMMENTS ARE WRITTEN IN BOLD
+
+\subsection{Model Selection (1 MORE PAGE)}
+\label{ModelSelection}
+\noindent INTRODUCE AIC AND BIC\\
+\noindent COMPARE AIC AND BIC, EXPLANATORY VS PREDICTIVE\\
+\noindent TALK ABOUT R IMPLEMENTATION FOR MODEL SELECTION\\
+\noindent GIVE EXAMPLES OF SUCH TREES\\
+
+Akaike's \emph{An Information Criterion}~\cite{citeulike:849862} allows one to estimate the divergence between the log-likelihood of a probabilistic model trained on some dataset, to the log-likelihood of the same model on out-of-sample data (previously unobsersed data). A practical application of AIC involves augmenting the log-likelihood of a model by the infamous value $2q$ (where $q$ is the number of degrees of freedom of the model) which allows nested submodels to be compared on their (estimated) ability to accurately predict on out-of-sample data. The result of this procedure is that more succinct submodels may be preferred over the original model (which uses all $q$ attributes). In relation to logistic regression, attributes can be automatically removed from the model to produce concise oblique splits. \\
+
+Schwarz's Information Criterion, more commonly known as the \emph{Bayesian Information Criterion}~\cite{citeulike:90008} provides a similarly practical result. Motivated through a bayesian framework, BIC penalises the log-likelihood of probabilistic models more severely than AIC and so for our purposes, produces oblique splits that are even more concise.\\
+
+%COMPARE AIC AND BIC, BIC BEING EXPLANATORY MODEL (AND THUS MORE CONCISE SPLITS) AND AIC BEING PREDICTIVE (AND THUS LESS CONCISE)\\
+
+\subsection{Penalised Likelihood (ANOTHER 3 PAGES)}
+\label{PenalisedLikelihood}
+\noindent EXPLAIN PENALISED LIKELIHOOD WORKS\\
+%EXPLAIN HOW TO ACTUALLY USE IT TO GROW A TREE AS NEED TO SET LAMBDA FOR EACH NODE\\
+\noindent SHOW HOW TO CAN BE USED WITH OBLIQUE TREES\\
+\noindent TALK ABOUT R IMPLEMENTATION (USED GLMPATH) 
+\noindent GIVE EXAMPLES OF SUCH TREES
+
+\section{Post-Tree Growth}
+\label{PostTreeGrowth}
+Though methods presented in Section~\ref{DuringTreeGrowth} allow oblique trees with concise oblique splits to be grown, it is not easy to specify how concise such splits should be. Post-tree growth methods are better able to do this and allows the user to choose how interpretable the resulting tree should become. \\
+
+\begin{comment}
+Implicit in this approach is the assumption that unoptimised oblique trees are adept at capturing good tree structure albeit with more complicated splits at internal nodes than we would like. This assumption allows significant reduction in additional computation needed to find concise oblique trees. For both suggested approaches, we firstly grow an unoptimised oblique tree $T$ to some training data \emph{Tr}.\\
+\end{comment}
+
+Section~\ref{TreePruning} begins with the observation that traditional cost-complexity pruning methods can also be applied to the resulting oblique trees that are grown. %STILL NEED TO WRITE THIS
+
+\subsection{Tree Pruning (ANOTHER 1/2 PAGE)}
+\label{TreePruning}
+\noindent COST-COMPLEXITY PRUNING ALSO WORKS WITH OBLIQUE TREES\\
+\noindent TALK ABOUT R IMPLEMENTATION\\
+\noindent GIVE AN EXAMPLES OF PRUNED OBLIQUE TREES 
+
+By examining ideas behind cost-complexity pruning of axis-parallel trees, it is easy to see that such techniques are equally applicable to oblique trees. An large oblique tree can be pruned to reveal a family of rooted subtrees giving the user the ability to specify the size the of tree desired.\\
+
+
+\subsection{\emph{Squeezing} Trees Using Shrinkage Methods}
+\noindent NEED TO RETHINK THIS SECTION THOUGH \\
+\noindent TALK ABOUT LARS WHICH IS USED
+\noindent GIVE EXAMPLES OF THIS \\
+\noindent TALK ABOUT LARS WHICH IS USED
+
+At any internal node $t$, we can fit a penalised logistic regression model to the data. By varying the value of the penalisation constant $\lambda_t$, we can \emph{squeeze} out unneccessary terms. Though different forms of penalisation ($L_1$, $L_2$, etc) affect the nature in which variables depart the model, this is immaterial at this stage of discussion. For each logistic regression model used at nodes $t$, it is important to note that $\lambda_t^{\mbox{max}}$ (the smallest value of $\lambda_t$ where the coefficients of the model are not affected by penalisation) varies significantly. I therefore feel that it is unwise to use a single numeric value of $\Lambda$ to simultaneuously penalise all logistic regression models in the oblique tree. Below are two better ways to holistically applying penalisation to logistic regression models in the tree,
+\begin{description}
+\item[Percentage-wise] Reducing a single term, the percentage $\Lambda_{\mbox{perc}}$, uniformly reduce the percentage of $\lambda_t^{\mbox{max}}$ used for the associated logistic regression models simultaneously
+\item[Sum-wise] Reduce the single term $\Lambda_{\mbox{sum}}=\sum_{\mbox{nodes }t\mbox{ in }T}\lambda_t^{\mbox{max}}$, this forces all coefficients down to zero as $\Lambda_{\mbox{sum}}\rightarrow 0$
+\end{description}
+Though both approaches seem reasonable, sum-wise penalisation seems unneccessarily complicated to implement and so I prefer the percentage-wise approach. Having said this, my experience of using penalised logistic regression suggests that extracting the transition points of $\lambda_t$ where attributes leave the model is itself a difficult process. I have also noticed that the resulting logistic regression models do not remove terms with small coefficients as thoroughly as subset selection methods. This brings me to my preferred post-tree growth approach.\\
+
+\subsection{Trimming Trees (ANOTHER 4 PAGES)}
+\noindent IT IS POSSIBLE TO ADAPT COST-COMPLEXITY PRUNING TO PRUNE THE SPLITS OF A TREE RATHER THAN ITS NODES. DOING SO ALLOWS A GIVEN TREE TO BE \emph{TRIMMED} SO THAT MORE CONCISE OBLIQUE SPLITS ARE USED. THIS SECTION EXPANDS UPON THIS IDEA. UNFORTUNATELY, I HAVE NOT WRITTEN OUT THE CODE FOR IT YET AND SO IT CANNOT BE TESTED YET.\\
+\noindent THIS SECTION EXPLAINS THIS IDEA, GIVING EXAMPLES AS WELL.
+
+As with Breiman \emph{et al}, let $R(T)$ be a measure of the tree formed by adding contributions over its leaves and consider the penalised measure of fit $$R_\alpha(T)=R(T)+\alpha \mbox{comp}(T).$$ Here, we depart slightly from traditional theory by forming $\mbox{comp}(T)$ defined as follows, $$\mbox{comp}(T)=\sum_{B\mbox{: branches of }T}\frac{\mbox{\# attributes used over all internal nodes of }B}{\mbox{\# internal nodes of }B}.$$ Though this may appear complicated, it is instructive to note that $\mbox{comp}(T)$ collapses to the usual definition of $\mbox{size}(T)$ when $T$ is an axis-parallel tree. For oblique trees however, this measure further penalises trees that require more decision making to reach its leaves, it rightly skews our attention to trees that have simpler splits nearer the root node.\\
+
+Traditional cost-complexity pruning seeks to find the smallest rooted subtree that minimises $R_\alpha(T)$ for some $\alpha$. We again depart slightly by seeking to minimise $R_\alpha(T)$ over a \emph{different} set of candidate trees, \emph{concise-trees}. For an oblique tree $T$, its family of \emph{concise-trees} has the same splitting structure in the sense that,
+\begin{enumerate}
+\item splits occur at the same internal nodes,
+\item logistic regression models at internal nodes are based on the same partitioning of residual classes from the training set and
+\item only a subset of the attributes used in the associated split of the original tree $T$ is permitted.
+\end{enumerate}
+Figure~\ref{fig:concisetreesandcomp} illustrates the concept of concise-trees and $\mbox{comp}()$ for individual branches more clearly. We wish to search over the set of concise-trees of $T$ to find the tree that minimises $R_\alpha(T)$ for some $\alpha$. \\
+
+\begin{figure}
+\centering
+\includegraphics*[viewport=0 0 340 455]{figconcisetreesandcomp.eps}
+\caption{Example of concise-trees and $\mbox{comp}(B)$ for a small oblique tree}
+\label{fig:concisetreesandcomp}
+\end{figure}
+
+At this point, the elegant theory of cost-complexity pruning that allows efficient navigation over all rooted subtrees no longer holds for the more complicated family of concise-trees. Proposition 7.2 of Ripley's \emph{PPRN} allows for a fast and efficient search for $T(\alpha)$ (the smallest rooted subtree that minimises $R_\alpha$) for a particular $\alpha$. The simple structure of rooted subtrees is pivotal in allowing such a computational shortcut to exist, added complications of concise-trees lends no such luxury. Though it is theoretically possible to find the concise-tree with the smallest value of $R_\alpha$ (with the smallest value of $\mbox{comp}(T)$) by searching over the entire family, it would take too long in reality. The following greedy heuristic search however may prove promising.\\ 
+
+We are firstly given some penalisation constant $\alpha$. For an internal node $t$ of an unoptimised oblique tree $T$, there are $n_t$ explanatory variables in the logistic regression model. Subset selection methods or shrinkage methods can reveal a new logistic regression model with $n_t-1$ terms which results in a new oblique split. The concise-tree $T_t^{\mbox{concise}}$ that replaces node $t$ with this new logistic regression model and leaves all other nodes untouched will have cost-complexity value $R_\alpha(T_t^{\mbox{concise}})$. Considering all such concise-trees by looking at all nodes $t$, we can greedily move to the concise-tree that gives the greatest reduction in $R_\alpha$. When $R_\alpha$ reaches a minimum, we accept this concise-tree $T_\alpha^{\mbox{heur}}$ as our approximation to $T_\alpha$, the best concise-tree.\\
+
+Proposition 7.3 of Ripley's \emph{PPRN} allows efficient traversal of all interesting values of $\alpha$. Again, this shortcut is not accessible for our more complex family of concise-trees. A brute force approach to find $T_\alpha^{\mbox{heur}}$ over a mesh of values of $\alpha$ seems feasible, we can stop searching when $T_\alpha^{\mbox{heur}}$ becomes the trivial tree. \\
+
+This approach allows a family of concise-trees with small value of $R_\alpha$ to be extracted from an unoptimised oblique tree from which the best generalising concise-tree can be chosen as usual.

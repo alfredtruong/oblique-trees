@@ -1,0 +1,84 @@
+#GROW DECISION TREES
+fgl.t=tree(type~.,data=fgl)
+fgl.ot=oblique.tree(type~.,data=fgl)
+fgl.ot.step=oblique.tree(type~.,data=fgl,stepaic=TRUE)
+
+#TREE COMPARISON
+postscript(file="fig.tree.comparison.fgl.ax.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+zz=fgl.t
+plot(zz);title(main="Axis Parallel Trees");
+zz$frame$splits=matrix("",nrow=dim(zz$frame)[1],ncol=2)
+levels(zz$frame$var)[levels(zz$frame$var)!="<leaf>"]=""
+text(zz,cex=0.7)
+dev.off()
+
+postscript(file="fig.tree.comparison.fgl.ob.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+zz=fgl.ot
+plot(zz);title(main="FCOT Trees");
+zz$frame$splits=matrix("",nrow=dim(zz$frame)[1],ncol=2)
+levels(zz$frame$var)[levels(zz$frame$var)!="<leaf>"]=""
+text(zz,cex=0.7)
+text(zz,cex=0.7)
+dev.off()
+
+postscript(file="fig.tree.comparison.fgl.ob.opt.tree.ps",width=4,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+zz=fgl.ot.step
+plot(zz);title(main="Optimised FCOT Trees");
+zz$frame$splits=matrix("",nrow=dim(zz$frame)[1],ncol=2)
+levels(zz$frame$var)[levels(zz$frame$var)!="<leaf>"]=""
+text(zz,cex=0.7)
+text(zz,cex=0.7)
+dev.off()
+
+
+#TRAINING ERRORS
+z=table(predict(fgl.t,type="class"),fgl$type)
+sum(z)-sum(diag(z));sum(z)
+zz=table(predict.oblique.tree(fgl.ot,type="class"),fgl$type)
+sum(zz)-sum(diag(zz));sum(zz)
+zzz=table(predict.oblique.tree(fgl.ot.step,type="class"),fgl$type)
+sum(zzz)-sum(diag(zzz));sum(zzz)
+
+#TEST ERRORS
+rand=sample(10,214,replace=TRUE)
+z.cv=cv.tree(fgl.t,rand=rand,method="misclass")
+zz.cv=cv.oblique.tree(fgl.ot,rand=rand,prune.impurity="misclass")
+zzz.cv=cv.oblique.tree(fgl.ot.step,rand=rand,prune.impurity="misclass")
+
+
+
+
+
+CHECK FGL.T.PRUNE AND Z DIFFERENCES
+
+(fgl.t.prune=prune.tree(fgl.t,method="misclass"))
+(fgl.ot.prune=prune.oblique.tree(fgl.ot,prune.impurity="misclass"))
+(fgl.ot.step.prune=prune.oblique.tree(fgl.ot.step,prune.impurity="misclass"))
+
+rand=sample(10,214,replace=TRUE)
+(fgl.t.cv=cv.tree(fgl.t,rand=rand,method="misclass"))
+(fgl.ot.cv=cv.oblique.tree(fgl.ot,rand=rand,prune.impurity="misclass"))
+(fgl.ot.step.cv=cv.oblique.tree(fgl.ot.step,rand=rand,prune.impurity="misclass"))
+
+windows();par(mfrow=c(1,3))
+plot(fgl.t.cv);
+plot(fgl.ot.cv);
+plot(fgl.ot.step.cv);
+
+fgl.t.best=prune.tree(fgl.t,k=fgl.t.cv$k[14])
+fgl.ot.best=prune.oblique.tree(fgl.ot,k=fgl.ot.cv$k[4])
+fgl.ot.step.best=prune.oblique.tree(fgl.ot.step,k=fgl.ot.step.cv$k[3])
+
+windows();par(mfrow=c(1,3))
+plot(fgl.t.best);text(fgl.t.best)
+plot(fgl.ot.best);text(fgl.ot.best)
+plot(fgl.ot.step.best);text(fgl.ot.step.best)
+
+fgl.t.best.cv=cv.tree(fgl.t.best,rand=rand)
+fgl.ot.best.cv=cv.oblique.tree(fgl.ot.best,rand=rand)

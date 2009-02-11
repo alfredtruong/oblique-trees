@@ -1,0 +1,28 @@
+library(MASS)
+library(tree)
+
+#fgl				LESS INTERPRETABLE
+	fgl.tree <- tree(	formula=type~.,
+			data=fgl)
+	plot(fgl.tree);text(fgl.tree)
+
+#pima				LESS INTERPRETABLE
+	postscript(file="interpretability_less_interpretable.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+		par(mar=c(1,1,4,1))
+		pima.tree <- tree(	formula=type~.,
+					data=Pima.tr)
+		plot(pima.tree);text(pima.tree)
+		title(main="Less Interpretable")
+	dev.off()
+
+#cushings			INTERPRETABLE
+	postscript(file="interpretability_interpretable.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+		par(mar=c(1,1,4,1))
+		cush.tree <- tree(	formula=Type~.,
+						data=Cushings)
+		plot(cush.tree);text(cush.tree)
+		title(main="Interpretable")
+	dev.off()
+
+
+

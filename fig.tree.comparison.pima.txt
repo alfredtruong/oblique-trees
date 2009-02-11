@@ -1,0 +1,63 @@
+#pima 
+postscript(file="fig.tree.comparison.pima.ax.tree.ps",width=10,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+pima.t=tree(type~.,Pima.tr)
+plot(pima.t);title(main="Axis Parallel Tree");text(pima.t,cex=0.7)
+dev.off()
+
+#pima OBLIQUE
+postscript(file="fig.tree.comparison.pima.ob.tree.ps",width=10,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+pima.ot=oblique.tree(type~.,Pima.tr)
+plot(pima.ot);title(main="FCOT Tree");text(pima.ot,cex=0.7)
+dev.off()
+
+#pima OBLIQUE OPTIMISED
+postscript(file="fig.tree.comparison.pima.ob.opt.tree.ps",width=10,height=10/3,horizontal=FALSE,paper="special")
+par(mar=c(1.1,0.5,4.1,0.5))
+par(xpd=FALSE)
+pima.ot.step=oblique.tree(type~.,Pima.tr,stepaic=TRUE)
+plot(pima.ot.step);title(main="Optimised FCOT Tree");text(pima.ot.step,cex=0.7)
+dev.off()
+
+
+
+
+
+
+#COST COMPLEXITY PLOTS
+postscript(file="fig.tree.comparison.pima.ax.prune.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+par(mar=c(5,4,5.5,2))
+plot(prune.tree(pima.t,method="misclass",newdata=Pima.te));title(main="Axis Parallel Tree");
+dev.off()
+
+postscript(file="fig.tree.comparison.pima.ob.prune.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+par(mar=c(5,4,5.5,2))
+plot(prune.oblique.tree(pima.ot,prune.impurity="misclass",newdata=Pima.te));title(main="Oblique Tree");
+dev.off()
+
+postscript(file="fig.tree.comparison.pima.ob.opt.prune.ps",width=4,height=4.5,horizontal=FALSE,paper="special")
+par(mar=c(5,4,5.5,2))
+plot(prune.oblique.tree(pima.ot.step,prune.impurity="misclass",newdata=Pima.te));title(main="Optimised Oblique Tree");
+dev.off()
+
+#TRAINING ERRORS
+z=table(predict(pima.t,type="class"),Pima.tr$type)
+sum(z)-sum(diag(z));sum(z)
+zz=table(predict.oblique.tree(pima.ot,type="class"),Pima.tr$type)
+sum(zz)-sum(diag(zz));sum(zz)
+zzz=table(predict.oblique.tree(pima.ot.step,type="class"),Pima.tr$type)
+sum(zzz)-sum(diag(zzz));sum(zzz)
+
+#TEST ERRORS
+z=table(predict(pima.t,newdata=Pima.te,type="class"),Pima.te$type)
+sum(z)-sum(diag(z));sum(z)
+zz=table(predict.oblique.tree(pima.ot,newdata=Pima.te,type="class"),Pima.te$type)
+sum(zz)-sum(diag(zz));sum(zz)
+zzz=table(predict.oblique.tree(pima.ot.step,newdata=Pima.te,type="class"),Pima.te$type)
+sum(zzz)-sum(diag(zzz));sum(zzz)
+
+
+

@@ -1,0 +1,200 @@
+#CLEAN START
+	rm(list=ls())
+	library(MASS)
+	library(tree)
+
+#GROWS AXIS PARALLEL
+	#get data
+	dat <- read.csv("fig_rooted_subtrees.csv")
+
+	#grow tree
+	dat.tree.named.nodes <- tree(	formula = C~.,
+				data = dat)
+
+
+	#rename tree splits to make it easy to read
+	dat.tree.named.nodes <- dat.tree.named.nodes
+	dat.tree.named.nodes$frame$splits[,1] <- row.names(dat.tree.named.nodes$frame)	#rename split name
+	levels(dat.tree.named.nodes$frame$var) <- c("<leaf>","Node ","Node ","Node ")	#rename split pre-fix
+	dat.tree.named.nodes$frame$yval <- rep("",times = 15)				#remove leaf predictions
+
+	plot(dat.tree.named.nodes,type="uniform")
+	text(dat.tree.named.nodes)
+
+
+#function to snip tree nodes and to plot the tree
+	snip.n.plot <- function(
+		tree,
+		nodes,
+		xy = c(1,1))
+	{
+		#snip
+		snipped.tree <- snip.tree(	tree = tree,
+						nodes = nodes)
+
+		#plot
+		par(mfg = xy)
+		#par(cex=1.5)
+		par(mai=c(0,0.5,1,0.5))
+		plot(snipped.tree,type="uniform")
+		text(snipped.tree,cex=2.5)
+		
+	}
+
+	#test out snip.n.plot()
+	#	x11();snip.n.plot(tree = dat.tree.named.nodes,nodes = 1)
+
+postscript(file="fig_rooted_subtrees.ps",width=20,height=25,horizontal=FALSE,paper="special")
+	#snip tree out all possible trees!
+	#x11()
+	par(mfrow=c(7,4))
+
+	######################################
+	par(mfg = c(1,1))
+	par(mai=c(0,0.5,1,0.5))
+
+	#rename tree splits to make it easy to read
+	plot(dat.tree.named.nodes,type="uniform")
+	text(dat.tree.named.nodes,font=1,cex=2.5)						#set labels to bold
+	par(font.main=1)
+	title(main="Maximal Tree",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = 4,
+				xy = c(1,2))
+	title(main="Collapse Node 4",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = 5,
+				xy = c(1,3))
+	title(main="Collapse Node 5",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = 6,
+				xy = c(1,4))
+	title(main="Collapse Node 6",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = 7,
+				xy = c(2,1))
+	title(main="Collapse Node 7",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,5),
+				xy = c(2,2))
+	title(main="Collapse Nodes 4 and 5",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,6),
+				xy = c(2,3))
+	title(main="Collapse Nodes 4 and 6",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,7),
+				xy = c(2,4))
+	title(main="Collapse Nodes 4 and 7",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(5,6),
+				xy = c(3,1))
+	title(main="Collapse Nodes 5 and 6",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(5,7),
+				xy = c(3,2))
+	title(main="Collapse Nodes 5 and 7",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(6,7),
+				xy = c(3,3))
+	title(main="Collapse Nodes 6 and 7",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,5,6),
+				xy = c(3,4))
+	title(main="Collapse Nodes 4, 5 and 6",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,5,7),
+				xy = c(4,1))
+	title(main="Collapse Nodes 4, 5 and 7",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,6,7),
+				xy = c(4,2))
+	title(main="Collapse Nodes 4, 6 and 7",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(5,6,7),
+				xy = c(4,3))
+	title(main="Collapse Nodes 5, 6 and 7",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(4,5,6,7),
+				xy = c(4,4))
+	title(main="Collapse Nodes 4, 5, 6 and 7",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(3),
+				xy = c(5,1))
+	title(main="Collapse Node 3",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(3,4),
+				xy = c(5,2))
+	title(main="Collapse Nodes 4 and 3",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(3,5),
+				xy = c(5,3))
+	title(main="Collapse Nodes 5 and 3",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(3,4,5),
+				xy = c(5,4))
+	title(main="Collapse Nodes 4, 5 and 3",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(2),
+				xy = c(6,1))
+	title(main="Collapse Node 2",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(2,6),
+				xy = c(6,2))
+	title(main="Collapse Nodes 2 and 6",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(2,7),
+				xy = c(6,3))
+	title(main="Collapse Nodes 2 and 7",cex.main=3)
+
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(2,6,7),
+				xy = c(6,4))
+	title(main="Collapse Nodes 2, 6 and 7",cex.main=3)
+
+	######################################
+	snip <- snip.n.plot(	tree = dat.tree.named.nodes,
+				nodes = c(2,3),
+				xy = c(7,1))
+	title(main="Collapse Nodes 2 and 3",cex.main=3)
+
+	par(mfg = c(7,2))
+	par(mai=c(0,0.5,1,0.5))
+
+	snipped.tree <- snip.tree(	tree = dat.tree.named.nodes,
+					nodes = 1)
+	class(snipped.tree) <- "tree"
+	plot(snipped.tree,type="uniform")
+	title(main="Collapse Node 1",cex.main=3)
+
+dev.off()
+
+

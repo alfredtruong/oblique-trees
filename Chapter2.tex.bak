@@ -1,0 +1,172 @@
+\chapter{Background}
+\label{Background}
+This chapter presents the basic idea of a Classification Tree and reviews issues involved when training CART trees to data. By covering various aspects of tree growth, likely reasons as to why existing approaches to growing oblique trees have not caught on are identified. Section~\ref{ClassificationTrees} revisits the idea of a Classification Tree and Section~\ref{TreeInterpretability} follows with a discussion of issues that affect the interpretability of a tree. Doing so demonstrates why oblique splits are sometimes be better suited for growing interpretable trees. Unfortunately, oblique splits are inherently difficult to use as will be explained in Section~\ref{FindingObliqueSplits}. A list of possible explanations why existing approaches to growing oblique trees have not caught on follow in Section~\ref{PossibleReasonsfortheStatusQuo}.
+
+\section{Classification Trees}
+\label{ClassificationTrees}
+\subsection{Natural Origins}
+\label{NaturalOrigins}
+The idea of tree-based classification appears naturally when considering populations with hierarchical structure and is nothing new. Biologists have long used this idea to help identify organisms, botanists to name plants~\cite{nla.cat-vn178734}~\cite{nla.cat-vn2380672} and doctors to assist medical diagnoses~\cite{609112}~\cite{AnneB.Nattinger04011998}. Tree-based classifiers allow subject specialists to distill expert knowledge into a set of easily understandable and transparent rules for others to follow. Figure~\ref{fig_taxonomy_key_biology_table} shows a simple application of this idea in Biology.
+\begin{figure}
+\centering
+\subfigure[Taxonomic Key for various species of plants.]{
+    \label{fig_taxonomy_key_biology_table}
+	\includegraphics[width=.47\textwidth]{fig_taxonomy_key_biology_table.eps}
+}
+\subfigure[Graphical representation of information contained in Taxonomic Key.]{
+    \label{fig_taxonomy_key_biology_tree}
+	\includegraphics[width=.47\textwidth]{fig_taxonomy_key_biology_tree.ps}
+}
+\caption{Tree-based classification is a natural way of classifying hierarchical populations and has long been used by practitioners from various fields. A Dichotomous Taxonomic Keys in particular ask a series of questions with \emph{Yes} or \emph{No} answers as shown in Figure~\ref{fig_taxonomy_key_biology_table}. It is easy to follow and each path leads to a class prediction. This information can also be represented by a tree (where left branches by convention denote positive answers).}
+\label{fig_taxonomy_key_biology}
+\end{figure}
+Armed with this Taxonomic Key, anyone can easily identify species of plants specified in the Key. If a plant has shoots and does not flower, it is a Pine Tree. If it shoots and flowers but does not have leaves, it is a Cactus Tree. The information contained in this construct can also be shown graphically by a tree as seen in Figure~\ref{fig_taxonomy_key_biology_tree}.\\
+
+Though a great deal of thought is often needed to create such Taxonomic Keys manually, researchers have sought ways of automating this process to extract information from databases in general. The question they have in mind is as follows,
+\begin{quote}
+\emph{Can tree-based classifiers be automatically grown to data in such a way that they can be used to accurately predict the class of previously unobserved observations?}
+\end{quote}
+Working independently, researchers from Computer Science~\cite{Quinlan.86}~\cite{Quinlan.88}~\cite{Quinlan.90} and Applied Statistics~\cite{cart84-2} arrived at similar solutions to this problem. With greater cross-fertilization of ideas and additional input from the Engineering community~\cite{Sethi.Sarvarayudu.82}, Breiman \emph{et al} proposed the widely accepted \emph{Classification and Regression Trees} algorithm in 1984 still widely used today. An overview of these ideas follow.
+
+\subsection{Tree Growth}
+\label{TreeGrowth}
+Given classification data of the form $\mathcal{T}=\left(C^i,X_1^i,\ldots,X_p^i\right)_{i=1}^N=\left(C^i,\Xb^i\right)_{i=1}^N$, a Classification Tree is grown to it by recursively partitioning observations into smaller subsets where observations have more similar classes. This process is naturally representable as a tree with
+\begin{itemize}
+\item[-] internal nodes were tests partition observations,
+\item[-] branches from nodes which represent the outcomes of these tests and
+\item[-] leaves at the bottom\footnote{Trees are conventionally drawn with its root at the top of a page growing downwards.} of the tree.
+\end{itemize}
+When using Classification Trees for prediction, observations are passed through the tree and classified by the class associated to the leaf where it falls. These ideas are illustrated in Figure~\ref{fig_typical_CART_tree}.
+\begin{figure}
+\centering
+\subfigure[Example of a binary splitting axis-parallel tree.]{
+	\label{fig_typical_CART_tree_plot_tree}
+	\includegraphics[width=.47\textwidth]{fig_typical_CART_tree_plot_tree.ps}
+}
+\subfigure[The associated decision boundaries defined by the tree on the feature space.]{
+	\label{fig_typical_CART_tree_decision_boundaries}
+	\includegraphics[width=.47\textwidth]{fig_typical_CART_tree_decision_boundaries.ps}
+}
+\caption{The above tree is grown to a training set where observations have two continuous attributes $p=2$ with observations from four classes $C\in\left\{1,\ldots,4\right\}$. Four dichotomous tests are applied at internal nodes to produce five leaves. The classes associated to each leaf are shown at the bottom of the tree. With $p=2$, it is possible to view the associated decision boundaries defined by the tree on the feature space $\Xb=\mathbb{R}^2$. As axis-parallel splits are used to partition observations, the feature space is partitioned in a rectangular fashion.}
+\label{fig_typical_CART_tree}
+\end{figure}
+As can be seen, five tests partition observations from four classes and good separation is achieved between observations of each class by the tree.\\
+
+Though the idea of a Classification Tree allows arbitrarily complex tests at internal nodes, CART trees focus on univariate binary splits to simplify the problem. Tests are univariate in that only one attribute is used to construct each test and binary in that they result in exactly two outcomes. Trees grown in this way partition observations into (high-dimensional) rectangular blocks as illustrated in Figure~\ref{fig_typical_CART_tree_decision_boundaries}.\\
+
+At each stage of tree growth, there are many candidate tests that can be applied. The form of a test depends on the type of data an attribute measures.
+\begin{description}
+\item[$X_i$ continuous:] tests constrained to be of the form $X_i<c$ v.s. $X_i\geq c$ for some constant $c\in\mathbb{R}$
+\item[$X_i$ categorical:] tests constrained to be of the form $X_i\in A$ v.s. $X_i\notin A$ for some subset $A$ of the factors of the categorical attribute $\left\{a_1,\ldots,a_{|X_i|}\right\}$ 
+\end{description}
+Of the numerous candidate tests, the one that ``best partitions observations of each class'' (the best split) is applied and the process is  recursed on child nodes. To decide which is best, it is common to compare an impurity measure over tests which somehow quantifies this concept. Further details are given later where this process is examined in greater detail.\\
+
+Having understood the generative process of recursive partitioning, we move onto measures taken to avoid overfitting\footnote{Highly parameterized statistical models can fit training data perfectly. Though this property is desirable for certain applications, in the area of Classification it results in classifiers that cannot predict well beyond the training data; they are poor predictors of previously unobserved observations.}. CART trees employ two techniques. The first involves stopping the recursive partitioning process early. The logic for this is as follows. If recursive partitioning proceeds until all observations from the training set can be perfectly predicted (observations at each leaf are of the same class), it is likely the tree has focused too much on random occurrences in the training set rather than general trends in the data. Early stopping avoids this by forcing recursive partitioning to terminate at internal nodes if any of the following criteria are satisfied,
+Having understood the idea behind tree growth, it is important to consider techniques to avoid overfitting\footnote{Highly parameterized statistical models can fit the data perfectly. Though this may be desirable in some circumstances, it results in classifiers that cannot generalize beyond the training data and so are poor predictors of previously unobserved observations.} the data. CART trees employ two techniques. The first involves stopping the recursive partitioning process early. The logic for this is as follows. If recursive partitioning proceeds until all observations from the training set are perfectly fitted (all leaves have observations of the same class), it is likely the tree would have focused on random occurrences in the training set instead of general trends in the data. To avoid this, recursive partition terminates at a node if any of the following criteria are satisfied,
+\begin{description}
+\item[Pure Nodes:] if all observation are of the same class, further partitioning adds no value.
+\item[Size Threshold:] if a node contains fewer than some prespecified number of observations (defaulted to 10), recursive partitioning terminates as the tree should not be allowed to focus on small details. 
+\item[Impurity Threshold:] if impurity at a node is below some prespecified proportion of that of the entire training set (defaulted to 0.01), recursive partitioning terminates as such nodes are deemed to be sufficiently pure.
+\item[Child Node Threshold:] if applying the best split produces a child node with less than some prespecified number of observations (defaulted to 5), recursive partitioning terminates as leaves should not be too particulated.
+\end{description}
+It is hoped that growing trees with these criteria in mind will force trees to focus on general trends and so not be overfit however early stopping alone cannot guarantee this. Breiman \emph{et al} introduced a technique called cost-complexity pruning that specially addresses this issue.
+
+\subsection{Cost-Complexity Pruning}
+\label{CostComplexityPruning}
+A tree must be grown on data to learn from it but it should not be overgrown lest it becomes overfit. Though early stopping prevents trees from focusing on small details, it can also obstructing the discovery of potentially useful splits (recursive partitioning may terminate just as tree growth is onto something). Cost-complexity pruning avoids this issue by simply growing an overfit tree as a means to find another that better generalizes; a rooted subtree of this tree that best generalizes. \\
+%This allows all avenues to be investigation during tree growth and allows a simple generalizing tree to be obtained. \\
+
+Though simple in theory, the number of rooted subtrees can be vast\footnote{Breiman \emph{et al}~\cite{cart84-2} p. 284 calculate an upper bound of $\lfloor 1.5028369^l\rfloor$ for the number of rooted subtrees of a binary tree with $l$ leaves: the number of rooted subtrees of a tree grows exponentially with the number leaves.}. There are $26 = \lfloor (1.5028369)^{2^3}\rfloor$ rooted subtrees of a 3-level saturated tree\footnote{An $n$-leveled saturated binary tree has $n$ levels of internal nodes with a full complement of $2^n$ leaves.} all shown in Figure~\ref{fig_rooted_subtrees} which clearly illustrates the exponential nature of this growth.
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{fig_rooted_subtrees.ps}
+\caption{A 3-leveled saturated tree is shown in the top-left plot with its nodes labeled. The other plots show its rooted subtrees. Rows 1 to 4 show rooted subtrees where neither nodes 2 and 3 are absent, row 5 show those where only node 3 is absent, row 6 show those where only node 2 is absent and the rest follow in the last row. One sees that the number of rooted subtrees grows in a multiplicative manner with each additional internal node.}
+\label{fig_rooted_subtrees}
+\end{figure}
+Examining the rooted subtrees of this tree, it is easy to see the multiplicative effect that an additional internal nodes has on the number of rooted subtrees of a tree. The number of rooted subtrees increases to $677 = \lfloor (1.5028369)^{2^4}\rfloor$ in the case of a 4-leveled saturated tree with only 7 nodes; it is impractical to consider \emph{all rooted subtrees}.\\
+
+Breiman \emph{et al} propose focusing on a special subset of rooted subtrees defined as follows. Let
+\begin{description}
+\item[$R(T)$] denote a measure of the goodness of fit of a tree found by adding contributions $r(t)$ over its leaves $t$ (where $r(t)$ is the number of misclassifications say or its impurity) and
+\item[$size(T)$] denote a penalty measure that increases as a tree becomes more complex (the number of leaves say) 
+\end{description} 
+then consider the following measure over the rooted subtrees of a tree, 
+$$R_k(T)=R(T)+k~size(T).$$
+For any $k$, $R_k(T)$ weights the ability of a rooted subtree to $T$ fit the data against its complexity to allow a method of comparison between rooted subtrees. Breiman \emph{et al} propose focusing only on rooted subtrees that minimize $R_k(T)$ for each value of $k$. Amazingly Breiman \emph{et al}~\cite{cart84-2} show\footnote{Concise version of these proofs can be found in Ripley~\cite{Ripley.96}.} that a nested family of rooted subtrees $\left\{T_i\right\}_{i=0}^K$ is optimal over all $k$ and that each $T_i$ is optimal over some range $k\in[k_i,k_{i+1})$ with $$-\infty=k_0<k_1<\ldots<\infty.$$ They also give a method to find these $k_i$ as well as an algorithm for construct this tree sequence $\left\{T_i\right\}_{i=0}^K$ from it. Amongst these $k+1$ rooted subtrees, the rooted subtree that best generalizes is used as the final classifier. The entire process is a illustrated in Figure~\ref{fig_tree_pruning}. 
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{fig_tree_pruning.ps}
+\caption{Cost-complexity pruning allows trees that generalize well to be found. Instead of stopping recursive partitioning early, cost-complexity pruning allows a tree to be fully grown (and thus overfit) to training data. A family of rooted subtrees $\left\{T_i\right\}_{i=0}^K$ with unique properties can then be extracted from this maximal tree. Each each tree in the tree sequence $\left\{T_i\right\}_{i=0}^K$ is nested and each tree $T_i$ minimizes $R_k(T)$ over a range of values $k\in[k_i,k_{i+1})$. Though prediction error over the training set increases as $k$ increases, out-of-sample prediction error needed not. The tree with the lowest out-of-sample prediction error (the best generalizing tree) is easily found and can be used as the final classifier. $T_1$ might have the lowest out-of-sample prediction error say and be chosen as the final classifier.}
+\label{fig_tree_pruning}
+\end{figure}
+
+\section{Tree Interpretability}
+\label{TreeInterpretability}
+As mentioned previously, the interpretability of a tree is its main strength. Though each univariate binary split is interpretable in isolation, the interpretability of entire axis-parallel trees need not be. Tree interpretability deteriorates with the size of a tree as seen in Figure~\ref{fig_tree_interpretability}.\\
+\begin{figure}
+\centering
+\includegraphics[width=.49\textwidth]{fig_tree_interpretability_more.ps}
+\includegraphics[width=.49\textwidth]{fig_tree_interpretability_less.ps}
+\caption{The interpretability of a tree depends on two factors, the interpretability of each split in isolation and its cumulative effect over the entire tree. A better balance can be struck between using simple tests that are easy to understand and more complex tests that allow smaller trees to be grown.}
+\label{fig_tree_interpretability}
+\end{figure}
+
+The reason why some trees are larger than others simply comes down to the interplay between how observations of different classes are distributed and the type of tests used to separate them (recursive partitioning proceeds proceeds until leaves are sufficiently pure with whatever tests it is allowed to consider). One way of obtaining smaller trees is to consider more general splits during tree growth. For tests over continuous attributes, a multivariate generalization of an axis-parallel split is an oblique split $\sum_{i=1}^q a_iX_i<c$ (assuming continuous attributes lie in the first $q$ positions). Oblique splits are better suited to partitioning observations as shown in Figure~\ref{fig_power_of_splits}.\\
+\begin{figure}
+\centering
+\subfigure[A single oblique split is enough to partition observations in this example.]{
+	\label{fig_power_of_splits_oblique}
+	\includegraphics[height=4cm]{fig_power_of_splits_oblique.ps}
+}
+\subfigure[An axis-parallel tree requires more splits to achieve the same partitioning of observations as a single oblique split.]{
+	\label{fig_power_of_splits_axis_parallel}
+	\includegraphics[height=4cm]{fig_power_of_splits_axis_parallel.ps}
+}
+\caption{Observations from this two-class classification problem are easily partitioned with a single oblique split as shown in Figure~\ref{fig_power_of_splits_oblique}. A single axis-parallel split however cannot produce the same partitioning and requires another level of splits to achieve the same result as shown in Figure~\ref{fig_power_of_splits_axis_parallel}. Oblique splits are better able at partitioning observations so trees grown using them should be smaller than those grown using axis-parallel splits.}
+\label{fig_power_of_splits}
+\end{figure}
+
+Though oblique trees are smaller than axis-parallel trees, they are not necessarily more interpretable. Inappropriate use of oblique splits can paradoxically reduce the interpretability of a tree as it simply over-complicates matters. This problem becomes more acute as the number of continuous attributes increases. Calling oblique splits that uses all $q$ continuous attributes as full oblique splits, they less interpretable than those composed with fewer continuous attributes, e.g. $X_1>0.25 X_2$ is more interpretable than $X_1>0.25 X_2+0.5 X_3+X_4$. Concise oblique splits should be used \emph{whenever possible} to grow more interpretable oblique trees.
+
+\section{Finding Oblique Splits}
+\label{FindingObliqueSplits}
+Putting aside the issue of how one grows interpretable oblique trees for the meantime, it is instructive to consider how hard it is to find the best full oblique split at each stage of tree growth. One ideally applies the test with the lowest impurity which implies that \emph{all possible tests} must be evaluated. By introducing the idea of a split dictionary it is possible to directly compare the size of the task posed by finding the best oblique split with that of finding the best axis-parallel split. \\
+
+A split dictionary for a family of splits is a set of splits of minimal size that produces all possible partitioning of observations permitted by that family of splits over the training set. Figure~\ref{fig_split_dictionaries} shows possible axis-parallel and oblique split dictionaries for the same dataset.
+\begin{figure}
+\centering
+\subfigure[Example of an axis-parallel split dictionary.]{
+	\label{fig_split_dictionary_axis_parallel}
+	\includegraphics[width=.45\textwidth]{fig_split_dictionary_axis_parallel.eps}
+}
+\subfigure[Example of an oblique split dictionary.]{
+	\label{fig_split_dictionary_oblique}
+	\includegraphics[width=.45\textwidth]{fig_split_dictionary_oblique.eps}
+}
+\caption{
+A split dictionary for a family of splits is a set of splits of minimal size that produces all possible partitioning of observations permitted by that family of splits over the training set. Though split dictionaries need not be unique (small perturbations of splits result in unique split dictionaries), its size remains constant for a given dataset. Figure~\ref{fig_split_dictionary_axis_parallel} shows a possible axis-parallel split dictionary for a small dataset of size 5. No other partitioning of observations with axis-parallel splits can result other than those generated here. Figure~\ref{fig_split_dictionary_oblique} shows a possible oblique split dictionary on the same training set of size 15. As oblique splits are more flexible, many other partitions of observations can be generated.}
+\label{fig_split_dictionaries}
+\end{figure}
+Though there are often many split dictionaries for a family of splits, its size remains constant for a given dataset.\\
+
+We start with axis-parallel splits $X_i<c$. Given a generic training set, though there are uncountably many splits ($c\subset B\subseteq\mathbb{R}$), only a finite number of unique partitioning of observations over the training set can ever occur. With $L_i$ unique values of data over continuous attribute $X_i$ there are exactly $L_i-1$ unique outcomes over attribute $X_i$. The size of the axis-parallel split dictionary over all continuous attributes is therefore $\sum_{i=1}^q (L_i-1)$. With each $L_i$ at most $N$ (the size of the training set), the axis-parallel split dictionary can be seen to grow at most linearly in both $N$ and $q$.\\
+
+A direct calculation of the size of the oblique split dictionary is much more difficult. Fortunately however its size has been shown to be exactly $\left\{2\sum_{k=0}^{q} {L_{gen}-1\choose k}-2\right\}/2$ where $L_{gen}$ is the number of generally positioned\footnote{A set of $q$-dimensional vectors are generally positioned if every subset of size $q$ or less is linearly independent.} $q$-dimensional observations in the training set. It is a consequence of a combinatorial geometry result\footnote{Given $L_{gen}$ generally positioned points in $q$-dimensional space, there are exactly $2\sum_{k=0}^{q-1} {L_{gen}-1\choose k}$ ways of partitioning them into two bins as specified by which side of the hyperplane $\left\{x:w\cdot x=0\right\}$ they fall. Cover (1965) extended this result to enumerate the number of ways there are to partition points with more hyperplanes of the form $\left\{x:w\cdot \phi(x)=0\right\}$ for general functions $\phi()$. Choosing $\phi(x)=(1,x)$ in particular shows there are exactly $2\sum_{k=0}^{q} {L_{gen}-1\choose k}$ ways to partition points into two bins across hyperplanes with arbitrary intercept. This includes the trivial cases where all points are assigned to the same bin and also double counting across bins.} by Cover (1965)~\cite{Cover65}. Assuming $L_{gen}$ is similar to $N$ (it will only be much less if all $q$-dimensional observations from the training set lie in a space of much lower dimensionality) the result shows that the oblique split dictionary grows super-linearly in both $N$ and $q$. \\
+
+As $N$ and $q$ are often large in real-life datasets, it is practically impossible to find the best oblique split at each stage of tree growth and explains why axis-parallel splits were chosen by Breiman \emph{et al}. Existing approaches to growing oblique trees avoid this computational explosion by doing one of two things,
+\begin{itemize}
+\item[-] choosing to focus on a subset of the oblique split dictionary
+\item[-] enforcing the early stopping of the search for the best split.
+\end{itemize}
+A suboptimal oblique split is and can only be used. Further details follow in Chapter~\ref{ExistingWork}.
+
+\section{Possible Reasons for the Status Quo}
+\label{PossibleReasonsfortheStatusQuo}
+Though much work has been done, none of the existing approaches to growing oblique trees have caught on. As has been shown in this chapter, it can be difficult to find oblique splits let alone growing an interpretable oblique tree. Possible reasons as to why existing approaches have not caught on are summarized below.
+\begin{description}
+\item[Intellectual Appeal of the Approach:] Existing approaches to growing oblique trees find oblique splits in archaic ways. This does not give confidence to users in the suitability of such approaches. 
+\item[Multiplicity of Trees:] To avoid the computational explosion noted in Section~\ref{FindingObliqueSplits}, some approaches find oblique splits stochastically which produces different a tree each time it is run. Though this is not necessarily a problem, no well-defined approach is given as to how one obtains a ``final classifier'' to use from many that can be grown. 
+\item[Interpretability of Trees:] Most work is content with simply growing oblique trees with full oblique splits. Full oblique trees are not necessarily interpretable and so have no comparative advantage over other classifiers.
+\item[Easily Accessible Implementations:] It is difficult to obtain and apply implementations of these approaches to real data.
+\end{description}
+This thesis seeks to address each of these shortcomings by proposing an intellectually appealing approach to growing more interpretable oblique trees while providing an easily accessible implementation of this approach for others to use.
